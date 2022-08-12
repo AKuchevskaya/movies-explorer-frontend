@@ -68,7 +68,7 @@
 @media screen and (max-width: 767px) {
     .header__registration {
         font-size: 10px;
-        margin: 0 7px 0 0;
+        margin: 0 2px 0 0;
         padding: 5px 12px;
     }
 }
