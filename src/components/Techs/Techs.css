@@ -1,5 +1,3 @@
-@import url(../AboutProject/AboutProject.css);
-
 .techs__content {
     background-color: #F5F5F5;
     padding: 100px 70px;
@@ -100,6 +98,7 @@
 }
 .techs__item {
     background-color: #E8E8E8;
+    border: none;
     border-radius: 10px;
     font-weight: 400;
     font-size: 14px;

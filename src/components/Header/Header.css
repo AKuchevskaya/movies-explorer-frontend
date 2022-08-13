@@ -151,8 +151,9 @@
     line-height: 16px;
     box-sizing: border-box;
     border-radius: 50px;
+    border: none;
     background-color: transparent;
-    border: 2px solid #AAAAAA;
+    outline: 2px solid #AAAAAA;
     cursor: pointer;
     transition: opacity 0.5s linear;
     padding: 6px 10px;
