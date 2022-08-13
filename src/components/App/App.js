@@ -5,7 +5,6 @@ import './App.css';
 //import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import AboutProject from "../AboutProject/AboutProject";
 import Navigation from "../Navigation/Navigation";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 // import Register from "../Register/Register";
@@ -20,7 +19,7 @@ function App() {
       
         <Header />
         <Main />
-        <AboutProject />
+        
         <Navigation />
         <NotFoundPage />
       
