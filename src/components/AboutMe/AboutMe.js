@@ -28,11 +28,11 @@ function AboutMe() {
             </ul>
         </article>
         <ul className="profile__social-pages">
-            <li>
-                <a className="profile__social-page">GitHub</a>
+            <li className="profile__social-page">
+                <a>GitHub</a>
             </li>
-            <li>
-                <a className="profile__social-page">VKontakte</a>
+            <li className="profile__social-page">
+                <a>VKontakte</a>
             </li>
         </ul>
         </section>
