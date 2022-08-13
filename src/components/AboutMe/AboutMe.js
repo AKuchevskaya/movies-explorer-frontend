@@ -5,7 +5,7 @@ import './AboutMe.css';
 import photoProfile from '../../images/photo_profile.jpg';
 function AboutMe() {
     return (
-        <div className="content profile__content">
+        <section className="content profile__content">
         <article className="content__text">
             <h2 className="content__title">Студент</h2>
             <ul className="profile__container">
@@ -35,30 +35,7 @@ function AboutMe() {
                 <a className="profile__social-page">VKontakte</a>
             </li>
         </ul>
-        <ul className="profile__portfolio">
-            <li className="profile__project-container">
-                <h3 className="profile__portfolio-title">Портфолио</h3>
-            </li>
-            <li className="profile__project-container">
-                <a className="profile__project-link">
-                    <p className="profile__project">Статичный сайт</p>
-                    <p className="profile__project-symbol">&#x2197;</p>
-                </a>
-            </li>
-            <li className="profile__project-container">
-                <a className="profile__project-link">
-                    <p className="profile__project">Адаптивный сайт</p>
-                    <p className="profile__project-symbol">&#x2197;</p>
-                </a>
-            </li>
-            <li className="profile__project-container">
-                <a className="profile__project-link">
-                    <p className="profile__project">Одностраничное приложение</p>
-                    <p className="profile__project-symbol">&#x2197;</p>
-                </a>
-            </li>
-        </ul>
-        </div>
+        </section>
     );
 }
 
