@@ -24,12 +24,7 @@
     }
 }
 
-.header__logo {
-    margin: 0;
-    padding: 0;
-    width: 38px;
-    height: 38px;
-}
+
 
 /* Ссылки в Header для незарегистрированного пользователя */
 .header__box {
@@ -41,12 +36,14 @@
 }
 .header__link {
     transition: opacity 0.5s linear;
+    cursor: pointer;
     margin: 0;
     padding: 0;
-    cursor: pointer;
     border-radius: 3px;
     border: none;
-    background-color: #F3C1F8;
+    background: transparent;
+    text-decoration: none;
+    color: #000000;
 }
 
 .header__link:hover {
@@ -145,34 +142,7 @@
         padding: 5px 12px;
     }
 }
-.profile-button {
-    display: flex;
-    font-size: 14px;
-    line-height: 16px;
-    box-sizing: border-box;
-    border-radius: 50px;
-    border: none;
-    background-color: transparent;
-    outline: 2px solid #AAAAAA;
-    cursor: pointer;
-    transition: opacity 0.5s linear;
-    padding: 6px 10px;
-}
 
-.profile-button:hover {
-    font-weight: 500;
-    opacity: .2;
-}
-.profile-icon {
-    padding: 0 7px 0 0;
-
-}
-.profile-text {
-    text-decoration: none;
-    font-weight: 400;
-    margin: 0;
-    text-align: right;
-}
 
 /* Ссылки в Header в виде меню */
 

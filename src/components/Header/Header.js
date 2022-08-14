@@ -1,10 +1,10 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import logo from '../../images/logo_smile.svg';
-import iconProfile from '../../images/icon_profile.svg';
 import menu from '../../images/icon_menu.svg';
 import './Header.css';
+import Logo from "../Logo/Logo";
+import AccountButton from "../AccountButton/AccountButton";
 
 
 
@@ -12,17 +12,20 @@ function Header() {
     return (
         <header className="header">
 
-                    <img src={logo} alt="Логотип сайта" className="header__logo" />
+                    <Logo />
 
                 <div className="header__box">
                
-                    <button className="header__link">
-                        <p className="header__registration">Регистрация</p>
-                    </button>
+                   
+                        <Link className="header__link" to="signup">
+                            <p className="header__registration">Регистрация</p>
+     
+                        </Link>
+                    
                 
-                    <button className="header__link">
+                    <Link className="header__link" to="signin">
                         <p className="header__autorization">Войти</p>
-                    </button>
+                    </Link>
                 
                 </div>
                 <div className="header__box_check">
@@ -32,18 +35,11 @@ function Header() {
                     <button className="header__link_check">
                         <p className="header__saved-movies">Сохраненные фильмы</p>
                     </button>
-                    <button className="profile-button">
-                    <img src={iconProfile} alt="Картинка аккаунта" className="profile-icon" />
-                    <p className="profile-text">Аккаунт</p>
-                    </button>
+                    <AccountButton />
                 </div>
                 <button className="header__menu">
                 <img src={menu} alt="Логотип меню" className="header__menu-icon" />
                 </button>
-               
-            
-    
- 
     </header>
     );
 }

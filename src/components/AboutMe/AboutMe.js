@@ -29,10 +29,10 @@ function AboutMe() {
         </article>
         <ul className="profile__social-pages">
             <li className="profile__social-page">
-                <a>GitHub</a>
+                <a target="_blank">GitHub</a>
             </li>
             <li className="profile__social-page">
-                <a>VKontakte</a>
+                <a target="_blank">VKontakte</a>
             </li>
         </ul>
         </section>

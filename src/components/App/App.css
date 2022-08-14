@@ -9,8 +9,8 @@
   justify-content: center;
 }
 .page__style {
-  /*background-color: #FFFFFF;*/
-  background-color: aqua;
+  background-color: #FFFFFF;
+  /* background-color: aqua; */
   font-family: 'Inter', Arial, sans-serif;
   color: #000000;
   font-style: normal;

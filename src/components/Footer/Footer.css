@@ -79,9 +79,7 @@
     line-height: 16px;
     text-align: right;
 }
-.footer__link:last-child {
-    padding-top: 12px;
-}
+
 
 @media screen and (max-width: 767px) {
     .footer__link {
@@ -90,4 +88,7 @@
         text-align: center;
         padding: 12px 0 0;
     }
-}
+    .footer__link:last-child {
+        padding-top: 12px;
+    }
+}   

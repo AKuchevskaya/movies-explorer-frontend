@@ -95,19 +95,23 @@
     }
 }
 
-.promo__button {
+.promo__link {
     outline: 1px solid #000000;
     border: none;
     border-radius: 3px;
-    background: transparent;
+    background-color: transparent;
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
     padding: 10px 20px;
     transition: opacity 0.5s linear;
     cursor: pointer;
+    text-decoration: none;
+    color: #000000;
 }
 
-.promo__button:hover {
+.promo__link:hover {
     opacity: 0.6;
+    background-color: #000000;
+    color: #FFFFFF;
 }
