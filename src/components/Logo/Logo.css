@@ -1,3 +1,12 @@
+.logo__link {
+    transition: opacity 0.5s linear;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+}
+.logo__link:hover {
+    opacity: 0.6;
+}
 .logo__image {
     margin: 0;
     padding: 0;

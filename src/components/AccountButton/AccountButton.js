@@ -5,9 +5,9 @@ import './AccountButton.css';
 
 function AccountButton() {
     return (
-        <button className="account-button">
-            <img src={iconAccount} alt="Картинка аккаунта" className="account-icon" />
-            <p className="account-text">Аккаунт</p>
+        <button className="account__button" type="submit">
+            <img src={iconAccount} alt="Картинка аккаунта" className="account__button-icon" />
+            <p className="account__button-text">Аккаунт</p>
         </button>           
     );
 }

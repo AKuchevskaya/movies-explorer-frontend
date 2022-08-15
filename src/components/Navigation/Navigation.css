@@ -1,5 +1,6 @@
-.nav__menu {
+/* .nav__menu {
     display: none;
+    max-width: 520px;
     flex-direction: column;
     align-items: center;
     background-color: #FFFFFF;
@@ -7,8 +8,55 @@
     position: absolute;
     top: 0;
     right: 0;
+
+} */
+.nav__menu {
+    position: fixed;
+    background-color: rgba(0,0,0,.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: calc(100% - 163px);
+    visibility: hidden;
+    
+    opacity: 0;
+    z-index: 0;
+}
+@media screen and (max-width: 767px) {
+    .nav__menu {
+        height: calc(100% - 404px);
+    }
 }
 
+.nav__container {
+    display: flex;
+    width: calc(520px - 90px*2);
+    transition: all 0.4s ease 0s;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 159px 90px 85px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .nav__container {
+        width: calc(320px - 10px*2);
+        padding: 144px 10px 46px;
+        position: fixed;
+    }
+}
+.nav__menu_opened {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
 
 .nav__close {
     background-color: transparent;
@@ -16,8 +64,10 @@
     position: absolute;
     top: 23px;
     right: 23px;
+    padding: 0;
     cursor: pointer;
     transition: opacity 0.5s linear;
+    
 }
 .nav__close:hover {
     opacity: 0.2;
@@ -31,12 +81,14 @@
 }
 
 .nav__close-icon {
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
     background-color: transparent;
 }
 
 .nav__link {
+    text-decoration: none;
+    color: #000000;
     font-weight: 400;
     text-decoration: none;
     padding-bottom: 28px;
@@ -45,11 +97,26 @@
     text-align: center;
     cursor: pointer;
 }
+.nav__link:last-of-type {
+    padding-bottom: 621px;
+}
 .nav__link:hover {
     font-weight: 500;
     text-decoration: underline 2px #000000;
 }
+.nav__link_active {
+    font-weight: 500;
+    text-decoration: underline 2px #000000;
+}
 
+@media screen and (max-width: 767px) {
+    .nav__link {
+        padding-bottom: 24px;
+    }
+    .nav__link:last-of-type {
+        padding-bottom: 442px;
+    }
+}
 .profile-button:hover {
     font-weight: 500;
     opacity: .2;

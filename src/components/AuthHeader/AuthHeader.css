@@ -1,0 +1,110 @@
+.authorization__header {  
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Ссылки в Header для авторизованного пользователя */
+.header__box_check {
+    display: flex;
+    background-color: transparent;
+    align-self: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+@media screen and (max-width: 1279px) {
+    .header__box_check {
+        display: none;
+    }
+}
+
+.header__link_check {
+    transition: opacity 0.5s linear;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color:#000000;
+    text-decoration: none;
+}
+.header__link_check:hover {
+    text-decoration: underline 2px #000000;
+    font-weight: 500;
+}
+
+.header__movies {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 22px 5px 0;
+}
+
+@media screen and (max-width: 767px) {
+    .header__movies {
+        font-size: 10px;
+        
+    }
+}
+.header__saved-movies {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 48px 5px 0;
+}
+
+@media screen and (max-width: 767px) {
+    .header__saved-movies {
+        font-size: 10px;
+        padding: 5px 12px;
+    }
+}
+
+/* Ссылки в Header в виде меню */
+
+.header__menu {
+    display: none;
+    border: none;
+    /* max-width: 520px; */
+    cursor: pointer;
+    transition: opacity 0.5s linear;
+    background-color: transparent;
+}
+.header__menu:hover {
+    opacity: 0.2;
+}
+@media screen and (max-width: 1279px) {
+    .header__menu {
+        display: flex;
+        padding: 0;
+    }
+}
+
+.header__menu-icon {
+    width: 44px;
+    height: 44px;
+}
+@media screen and (max-width: 1279px) {
+    .header__menu-icon {
+        
+        margin-top: -3px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .header__menu-icon {
+        width: 40px;
+        height: 43px;
+        margin-top: -3px;
+    }
+}

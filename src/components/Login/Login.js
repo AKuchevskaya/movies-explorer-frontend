@@ -12,7 +12,7 @@ function Login() {
             <p className="login__title">Рады видеть!</p>
             <Form />
            
-        <button className="login__button login__button" type="submit">
+        <button className="login__button" type="submit">
         Войти
         </button>
         <p className="login__question">

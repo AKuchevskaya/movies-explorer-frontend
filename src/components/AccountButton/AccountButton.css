@@ -1,27 +1,43 @@
-.account-button {
+.account__button {
     display: flex;
     font-size: 14px;
     line-height: 16px;
     box-sizing: border-box;
     border-radius: 50px;
-    border: none;
+    outline: none;
     background-color: transparent;
-    outline: 2px solid #AAAAAA;
+    border: 2px solid #AAAAAA;
     cursor: pointer;
     transition: opacity 0.5s linear;
-    padding: 6px 10px;
+    padding: 6px 12px;
+    margin-bottom: 5px;
 }
-.account-button:hover {
+.account__button:hover {
     font-weight: 500;
     opacity: .2;
 }
-.account-icon {
+@media screen and (max-width: 767px) {
+    .account__button {
+        padding: 8px 12px;
+        margin-bottom: 0
+    }
+}
+
+.account__button-icon {
     padding: 0 7px 0 0;
+    width: 12px;
+    height: 14px;
 
 }
-.account-text {
+.account__button-text {
     text-decoration: none;
     font-weight: 400;
     margin: 0;
     text-align: right;
+}
+
+@media screen and (max-width: 767px) {
+    .account__button-text {
+        font-weight: 500;
+    }
 }

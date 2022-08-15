@@ -8,6 +8,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import Profile from "../Profile/Profile";
 import Navigation from "../Navigation/Navigation";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 // import Register from "../Register/Register";
@@ -35,7 +36,10 @@ function App() {
           <Route path="/signin">
             <Login />
           </Route>
-          
+          <Route path="/profile">
+            <Profile />
+          </Route>
+
           <Navigation />
           <Route path="*">
             <NotFoundPage />
