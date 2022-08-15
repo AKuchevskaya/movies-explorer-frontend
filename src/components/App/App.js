@@ -2,33 +2,21 @@
 import { Switch, Route } from "react-router-dom";
 
 import './App.css';
-//import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import Header from "../Header/Header";
 import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
-import Navigation from "../Navigation/Navigation";
+
+import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-// import Register from "../Register/Register";
-// import Login from "../Login/Login";
+
 
 function App() {
-
-
   return (
-
       <div className="page page__style">
-      
-        
         <Switch>
-        
-          
           <Route exact path="/">
-            <Header />
             <Main />
-            <Footer />
           </Route>
           <Route path="/signup">
             <Register />
@@ -39,8 +27,11 @@ function App() {
           <Route path="/profile">
             <Profile />
           </Route>
-
-          <Navigation />
+          <Route path="/saved-movies">
+            <SavedMovies />
+          </Route>
+          
+          
           <Route path="*">
             <NotFoundPage />
           </Route>

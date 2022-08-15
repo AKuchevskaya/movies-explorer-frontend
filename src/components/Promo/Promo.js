@@ -1,10 +1,7 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 
 import webWord from '../../images/web_world.svg';
 import './Promo.css';
-
-
 
 function Promo() {
     return (

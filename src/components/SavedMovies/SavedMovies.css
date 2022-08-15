@@ -1,0 +1,6 @@
+.bestmovie__container {
+    max-width: calc(100% - 70px*2);
+    padding: 18px 70px 20px;
+    display: flex;
+    flex-direction: column;
+}

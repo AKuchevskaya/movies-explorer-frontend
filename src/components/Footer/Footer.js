@@ -5,7 +5,7 @@ import './Footer.css';
 //import photoProfile from '../../images/photo_profile.jpg';
 function Footer() {
     return (
-        <footer className="footer">
+        
             <section className="footer__container">
                 <p className="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</p>
                 <div className="footer__columns">
@@ -24,7 +24,7 @@ function Footer() {
                 </ul>
                 </div>
             </section>
-        </footer>
+      
     );
 }
 

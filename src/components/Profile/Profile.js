@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './Profile.css';
 import AuthHeader from "../AuthHeader/AuthHeader";
 
-
 function Profile() {
     return (
         <div className="account">
