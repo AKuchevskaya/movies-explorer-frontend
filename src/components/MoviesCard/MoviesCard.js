@@ -1,12 +1,10 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 
 import posterOne from '../../images/poster_one.jpg';
 import posterTwo from '../../images/poster_two.jpg';
 import './MoviesCard.css';
 
 function MoviesCard() {
-    const location = useLocation();
     return (   
         <>
         <div className="movie__box">

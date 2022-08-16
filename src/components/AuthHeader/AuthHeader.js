@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import { Link } from 'react-router-dom';
 
-import menu from '../../images/icon_menu.svg';
 import './AuthHeader.css';
 import Logo from "../Logo/Logo";
 import AccountButton from "../AccountButton/AccountButton";
@@ -28,7 +27,7 @@ function AuthHeader() {
                 <AccountButton />
             </div>
             <button className="header__menu" type="submit" onClick={openMenu}>
-                <img src={menu} alt="Логотип меню" className="header__menu-icon" />
+                {/* <img src={menu} alt="Логотип меню" className="header__menu-icon" /> */}
             </button>
         {<Navigation isOpen={isOpenedMenu} onClose={closeMenu}/>}
         

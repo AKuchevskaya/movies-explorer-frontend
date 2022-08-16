@@ -81,7 +81,7 @@
 }
 @media screen and (max-width: 767px) {
     .movie__button {
-        margin: 14px 0;
+        margin: 13px 0;
     }
 }
 
@@ -118,4 +118,9 @@
 .movie__button-save:hover {
     opacity: 0.2;
     border: 2px solid #000000;
+}
+@media screen and (max-width: 767px) {
+    .movie__button-save {
+        margin: 13px 0;
+    }
 }

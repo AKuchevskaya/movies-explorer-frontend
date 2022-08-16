@@ -6,6 +6,12 @@
     position: relative;
 }
 
+@media screen and (max-width: 767px) {
+    .authorization__header {
+        padding: 0 4px;
+    }
+}
+
 /* Ссылки в Header для авторизованного пользователя */
 .header__box_check {
     display: flex;
@@ -86,25 +92,35 @@
 }
 @media screen and (max-width: 1279px) {
     .header__menu {
-        display: flex;
+        display: block;
         padding: 0;
+
+        background-image: url(../../images/icon_menu.svg);
+        width: 44px;
+        height: 44px;
+        background-size: 44px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+@media screen and (max-width: 767px) {
+    .header__menu {
+        width: 40px;
+        height: 43px;
+        background-size: 40px;
     }
 }
 
 .header__menu-icon {
     width: 44px;
     height: 44px;
+    margin: 0;
 }
-@media screen and (max-width: 1279px) {
-    .header__menu-icon {
-        
-        margin-top: -3px;
-    }
-}
+
 @media screen and (max-width: 767px) {
     .header__menu-icon {
         width: 40px;
         height: 43px;
-        margin-top: -3px;
+        
     }
 }
