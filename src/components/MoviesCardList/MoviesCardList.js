@@ -1,18 +1,16 @@
-import React from 'react';
-import MoviesCard from '../MoviesCard/MoviesCard';
-import ButtonMore from '../ButtonMore/ButtonMore';
-import './MoviesCardList.css';
+import React from "react";
+import MoviesCard from "../MoviesCard/MoviesCard";
+import ButtonMore from "../ButtonMore/ButtonMore";
+import "./MoviesCardList.css";
 
 function MoviesCardList() {
   return (
     <>
-    <div className="movies__container">
-      <MoviesCard />
-        
-    </div>
-    <ButtonMore />
+      <div className="movies__container">
+        <MoviesCard />
+      </div>
+      <ButtonMore />
     </>
-    
   );
 }
 

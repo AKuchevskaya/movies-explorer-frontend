@@ -1,7 +1,7 @@
-import './SearchForm.css';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import "./SearchForm.css";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm () {
+function SearchForm() {
   return (
     <form className="searchform">
       <div className="searchform__search">
@@ -11,13 +11,11 @@ function SearchForm () {
           type="search"
           required
         ></input>
-        <button className="searchform__button">
-            Найти
-        </button>
+        <button className="searchform__button">Найти</button>
       </div>
       <FilterCheckbox />
     </form>
   );
-};
+}
 
 export default SearchForm;
