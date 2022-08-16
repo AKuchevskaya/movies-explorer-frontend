@@ -8,17 +8,20 @@
     margin-top: 37px;
   }
 }
+
 @media screen and (max-width: 767px) {
   .checkbox__container {
     margin-top: 43px;
   }
 }
+
 .checkbox__text {
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
   margin: 0 14px 0 0;
 }
+
 @media screen and (max-width: 1279px) {
   .checkbox__text {
     margin: 0 12px 0 0;
@@ -31,54 +34,53 @@
     font-size: 11px;
   }
 }
-  
-  .checkbox__switch {
-    display: inline-block;
-    height: 20px;
-    width: 36px;
-    position: relative;
-  }
-  
-  .checkbox__switch input {
-    display:none;
-  }
-  
-  .checkbox__slider {
-    background-color: #EBEBEB;
-    position: absolute;
-    cursor: pointer;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    transition: .4s;
-  }
-  
-  .checkbox__slider:before {
-    background-color: #FFFFFF;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 2px;
-    bottom: 2px;
-    position: absolute;
-    transition: .4s;
-    
-  }
-  
-  input:checked + .checkbox__slider {
-    background-color: #2BE080;
-  }
-  
-  input:checked + .checkbox__slider:before {
-    transform: translateX(16px);
-  }
-  
-  .checkbox__slider.checkbox__round {
-    border-radius: 20px;
-  }
-  
-  .checkbox__slider.checkbox__round:before {
-    border-radius: 50%;
-  }
-  
+
+.checkbox__switch {
+  display: inline-block;
+  height: 20px;
+  width: 36px;
+  position: relative;
+}
+
+.checkbox__switch input {
+  display: none;
+}
+
+.checkbox__slider {
+  background-color: #EBEBEB;
+  position: absolute;
+  cursor: pointer;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: .4s;
+}
+
+.checkbox__slider:before {
+  background-color: #FFFFFF;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  position: absolute;
+  transition: .4s;
+
+}
+
+input:checked+.checkbox__slider {
+  background-color: #2BE080;
+}
+
+input:checked+.checkbox__slider:before {
+  transform: translateX(16px);
+}
+
+.checkbox__slider.checkbox__round {
+  border-radius: 20px;
+}
+
+.checkbox__slider.checkbox__round:before {
+  border-radius: 50%;
+}

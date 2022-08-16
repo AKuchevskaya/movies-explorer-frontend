@@ -7,33 +7,33 @@ import Form from "../Form/Form";
 
 function Register() {
   return (
-    <div className="register">
+    <div className='register'>
       <Logo />
-      <p className="register__title">Добро пожаловать!</p>
+      <p className='register__title'>Добро пожаловать!</p>
 
       <Form>
-        <label className="form__data" htmlFor="name">
+        <label className='form__data' htmlFor='name'>
           Имя
         </label>
         <input
-          className="form__input"
-          placeholder="Введите свое имя"
-          id="name"
-          name="text"
-          type="text"
-          value="Виталий"
+          className='form__input'
+          placeholder='Введите свое имя'
+          id='name'
+          name='text'
+          type='text'
+          value='Виталий'
           minLength={2}
           maxLength={30}
           required
         />
-        <span className="form__input-error"></span>
+        <span className='form__input-error'></span>
       </Form>
-      <button className="register__button" type="submit">
+      <button className='register__button' type='submit'>
         Зарегистрироваться
       </button>
-      <p className="register__question">
+      <p className='register__question'>
         Уже зарегистрированы?
-        <Link className="register__link" to="/signin">
+        <Link className='register__link' to='/signin'>
           Войти
         </Link>
       </p>

@@ -11,7 +11,7 @@ function ButtonMore() {
         movie__button-more_${
           location.pathname === "/saved-movies" ? "invisible" : ""
         }`}
-      type="button"
+      type='button'
     >
       Ещё
     </button>

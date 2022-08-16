@@ -1,4 +1,4 @@
-.authorization__header {  
+.authorization__header {
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -21,6 +21,7 @@
     margin: 0;
     padding: 0;
 }
+
 @media screen and (max-width: 1279px) {
     .header__box_check {
         display: none;
@@ -34,9 +35,10 @@
     cursor: pointer;
     border: none;
     background-color: transparent;
-    color:#000000;
+    color: #000000;
     text-decoration: none;
 }
+
 .header__link_check:hover {
     text-decoration: underline 2px #000000;
     font-weight: 500;
@@ -56,9 +58,10 @@
 @media screen and (max-width: 767px) {
     .header__movies {
         font-size: 10px;
-        
+
     }
 }
+
 .header__saved-movies {
     text-decoration: none;
     font-weight: 400;
@@ -87,9 +90,11 @@
     transition: opacity 0.5s linear;
     background-color: transparent;
 }
+
 .header__menu:hover {
     opacity: 0.2;
 }
+
 @media screen and (max-width: 1279px) {
     .header__menu {
         display: block;
@@ -103,6 +108,7 @@
         background-position: center;
     }
 }
+
 @media screen and (max-width: 767px) {
     .header__menu {
         width: 40px;
@@ -121,6 +127,6 @@
     .header__menu-icon {
         width: 40px;
         height: 43px;
-        
+
     }
 }

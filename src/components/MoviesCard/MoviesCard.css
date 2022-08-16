@@ -5,28 +5,33 @@
     display: flex;
     flex-direction: column;
 }
+
 .movie__header {
     padding: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 @media screen and (max-width: 767px) {
     .movie__header {
         padding: 14px;
     }
 }
+
 .movie__title {
     font-weight: 500;
     font-size: 15px;
     line-height: 18px;
     margin: 0;
 }
+
 @media screen and (max-width: 767px) {
     .movie__title {
         font-size: 12px;
     }
 }
+
 .movie__time {
     font-weight: 400;
     font-size: 13px;
@@ -36,11 +41,13 @@
     margin: 0;
 
 }
+
 @media screen and (max-width: 767px) {
     .movie__time {
         font-size: 10px;
     }
 }
+
 .movie__picture {
     width: 360px;
     height: 200px;
@@ -48,37 +55,42 @@
     overflow: hidden;
     background-color: #FDFDFD;
 }
+
 @media screen and (max-width: 1279px) {
     .movie__picture {
         width: 342px;
         height: 190px;
     }
 }
+
 @media screen and (max-width: 767px) {
     .movie__picture {
         width: 300px;
         height: 169px;
     }
 }
+
 .movie__button {
     margin: 18px 0;
     align-self: center;
     background: url(../../images/button_for_saved_movie.svg);
-        box-sizing: border-box;
-        background-color: #F9F9F9;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 100px;
-        height: 29px;
+    box-sizing: border-box;
+    background-color: #F9F9F9;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 29px;
     border-radius: 30px;
     border: none;
     transition: opacity 0.5s linear;
     cursor: pointer;
 }
+
 .movie__button:hover {
     opacity: 0.2;
     border: 2px solid #000000;
 }
+
 @media screen and (max-width: 767px) {
     .movie__button {
         margin: 13px 0;
@@ -94,9 +106,11 @@
     width: 100px;
     height: 29px;
 }
+
 .movie__button_active:hover {
     border: 2px solid #F9F9F9;
 }
+
 .movie__button-save {
     background: none;
     background-color: #F9F9F9;
@@ -115,10 +129,12 @@
     line-height: 11px;
     text-align: center;
 }
+
 .movie__button-save:hover {
     opacity: 0.2;
     border: 2px solid #000000;
 }
+
 @media screen and (max-width: 767px) {
     .movie__button-save {
         margin: 13px 0;

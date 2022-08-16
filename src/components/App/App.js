@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import "./App.css";
@@ -7,30 +6,34 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 
+import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
   return (
-    <div className="page page__style">
+    <div className='page page__style'>
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <Main />
         </Route>
-        <Route path="/signup">
+        <Route path='/signup'>
           <Register />
         </Route>
-        <Route path="/signin">
+        <Route path='/signin'>
           <Login />
         </Route>
-        <Route path="/profile">
+        <Route path='/profile'>
           <Profile />
         </Route>
-        <Route path="/saved-movies">
+        <Route path='/movies'>
+          <Movies />
+        </Route>
+        <Route path='/saved-movies'>
           <SavedMovies />
         </Route>
 
-        <Route path="*">
+        <Route path='*'>
           <NotFoundPage />
         </Route>
       </Switch>

@@ -2,13 +2,14 @@
     width: calc(100% - 70px*2);
     padding: 110px 70px;
 }
+
 @media screen and (max-width: 1279px) {
     .content {
         width: calc(100% - 50px*2);
         padding: 90px 50px;
     }
 }
-  
+
 @media screen and (max-width: 767px) {
     .content {
         width: calc(100% - 18px*2);
@@ -19,6 +20,7 @@
 .content__text {
     display: grid;
 }
+
 .content__title {
     font-weight: 400;
     font-size: 22px;
@@ -36,6 +38,7 @@
         padding-bottom: 28px;
     }
 }
+
 .content__list {
     display: grid;
     grid-template-rows: 1fr;
@@ -47,12 +50,14 @@
     padding: 70px 0 110px;
     margin: 0;
 }
+
 @media screen and (max-width: 1279px) {
     .content__list {
         padding: 70px 0 93px;
         gap: 30px;
     }
 }
+
 @media screen and (max-width: 767px) {
     .content__list {
         padding: 60px 0;
@@ -61,6 +66,7 @@
         gap: 56px;
     }
 }
+
 .content__subtitle {
     font-weight: 400;
     font-size: 20px;
@@ -69,12 +75,14 @@
     padding: 0;
     margin: 0;
 }
+
 @media screen and (max-width: 767px) {
     .content__subtitle {
         font-size: 18px;
         line-height: 22px;
     }
 }
+
 .content__discription {
     font-weight: 400;
     font-size: 14px;
@@ -90,6 +98,7 @@
         padding: 22px 0 0;
     }
 }
+
 @media screen and (max-width: 767px) {
     .content__discription {
         font-size: 11px;
@@ -97,6 +106,7 @@
         padding: 16px 0 0;
     }
 }
+
 .content__plan {
     list-style: none;
     padding: 0;
@@ -105,11 +115,13 @@
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 4fr;
 }
+
 @media screen and (max-width: 767px) {
     .content__plan {
         grid-template-columns: 1fr 2fr;
     }
 }
+
 .content__time {
     padding: 9px 0;
     margin: 0;
@@ -119,6 +131,7 @@
     text-align: center;
     background-color: #F2F2F2;
 }
+
 @media screen and (max-width: 767px) {
     .content__time {
         padding: 11px 0;
@@ -126,10 +139,12 @@
         line-height: 13px;
     }
 }
+
 .dark-theme {
     background-color: #000000;
     color: #FFFFFF;
 }
+
 .content__work {
     padding: 14px 0 0;
     margin: 0;
@@ -139,11 +154,13 @@
     line-height: 17px;
     color: #A0A0A0;
 }
+
 @media screen and (max-width: 1279px) {
     .content__work {
         font-weight: 400;
     }
 }
+
 @media screen and (max-width: 767px) {
     .content__work {
         padding: 10px 0 0;

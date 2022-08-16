@@ -6,14 +6,14 @@ import Logo from "../Logo/Logo";
 
 function Header() {
   return (
-    <header className="header">
+    <header className='header'>
       <Logo />
-      <div className="header__box">
-        <Link className="header__link" to="signup">
-          <p className="header__registration">Регистрация</p>
+      <div className='header__box'>
+        <Link className='header__link' to='signup'>
+          <p className='header__registration'>Регистрация</p>
         </Link>
-        <Link className="header__link" to="signin">
-          <p className="header__autorization">Войти</p>
+        <Link className='header__link' to='signin'>
+          <p className='header__autorization'>Войти</p>
         </Link>
       </div>
     </header>

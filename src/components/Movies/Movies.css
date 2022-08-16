@@ -1,4 +1,4 @@
-.bestmovie__container {
+.movie__container {
     max-width: calc(100% - 70px*2);
     padding: 18px 70px 20px;
     display: flex;
@@ -6,14 +6,14 @@
 }
 
 @media screen and (max-width: 1279px) {
-    .bestmovie__container {
+    .movie__container {
         max-width: calc(100% - 30px*2);
         padding: 15px 30px 20px;
     }
 }
 
 @media screen and (max-width: 767px) {
-    .bestmovie__container {
+    .movie__container {
         max-width: calc(100% - 10px*2);
         padding: 15px 10px 10px;
     }

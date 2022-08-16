@@ -1,4 +1,4 @@
-.header {  
+.header {
     width: calc(100% - 70px*2);
     padding: 18px 70px;
     display: flex;
@@ -12,19 +12,16 @@
 @media screen and (max-width: 1279px) {
     .header {
         width: calc(100% - 30px*2);
-        padding: 18px 30px;
-
+        padding: 15px 30px;
     }
 }
-  
+
 @media screen and (max-width: 767px) {
     .header {
         width: calc(100% - 14px*2);
-        padding: 18px 14px;
+        padding: 15px 14px;
     }
 }
-
-
 
 /* Ссылки в Header для незарегистрированного пользователя */
 .header__box {
@@ -34,6 +31,13 @@
     margin: 0;
     padding: 0;
 }
+@media screen and (max-width: 767px) {
+    .header__box {
+        margin-top: 3px;
+    }
+}
+
+
 .header__link {
     transition: opacity 0.5s linear;
     cursor: pointer;
@@ -58,10 +62,11 @@
     font-size: 12px;
     line-height: 16px;
     text-align: right;
-    
+
     margin: 0 10px 0 0;
     padding: 8px 20px;
 }
+
 @media screen and (max-width: 767px) {
     .header__registration {
         font-size: 10px;
@@ -69,13 +74,13 @@
         padding: 5px 12px;
     }
 }
+
 .header__autorization {
     text-decoration: none;
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
     text-align: right;
-
     margin: 0;
     padding: 8px 20px;
 }
@@ -86,5 +91,3 @@
         padding: 5px 12px;
     }
 }
-
-

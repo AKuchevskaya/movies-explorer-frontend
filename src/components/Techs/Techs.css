@@ -15,6 +15,7 @@
         padding: 70px 18px;
     }
 }
+
 .techs__list {
     display: grid;
     grid-template-rows: 1fr;
@@ -25,16 +26,19 @@
     padding: 90px 0 100px;
     margin: 0 auto;
 }
+
 @media screen and (max-width: 1279px) {
     .techs__list {
         padding: 80px 0 83px;
     }
 }
+
 @media screen and (max-width: 767px) {
     .techs__list {
         padding: 60px 0 50px;
     }
 }
+
 .techs__subtitle {
     font-weight: 400;
     font-size: 50px;
@@ -44,12 +48,14 @@
     padding: 0;
     margin: 0;
 }
+
 @media screen and (max-width: 767px) {
     .techs__subtitle {
         font-size: 30px;
         line-height: 36px;
     }
 }
+
 .techs__discription {
     max-width: 460px;
     font-weight: 400;
@@ -60,6 +66,7 @@
     padding: 26px 0 0;
     margin: 0;
 }
+
 @media screen and (max-width: 1279px) {
     .techs__discription {
         font-size: 12px;
@@ -67,6 +74,7 @@
         padding: 22px 0 0;
     }
 }
+
 @media screen and (max-width: 767px) {
     .techs__discription {
         font-size: 11px;
@@ -74,6 +82,7 @@
         padding: 24px 0 0;
     }
 }
+
 .techs__block {
     list-style: none;
     padding: 0;
@@ -84,11 +93,13 @@
     column-gap: 10px;
     justify-content: center;
 }
+
 @media screen and (max-width: 1279px) {
     .techs__block {
         grid-template-columns: repeat(7, 84px);
     }
 }
+
 @media screen and (max-width: 767px) {
     .techs__block {
         grid-template-rows: repeat(4, 1fr);
@@ -96,6 +107,7 @@
         gap: 10px;
     }
 }
+
 .techs__item {
     background-color: #E8E8E8;
     border: none;
@@ -108,6 +120,7 @@
     padding: 21px 0 22px;
     margin: 0;
 }
+
 @media screen and (max-width: 1279px) {
     .techs__item {
         font-size: 12px;

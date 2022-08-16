@@ -4,6 +4,7 @@
     text-decoration: none;
     border: none;
 }
+
 .logo__link:hover {
     opacity: 0.6;
 }

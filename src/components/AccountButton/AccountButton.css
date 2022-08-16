@@ -13,16 +13,18 @@
     margin-bottom: 5px;
     opacity: .6;
 }
+
 .account__button:hover {
     font-weight: 500;
     opacity: .2;
 }
+
 @media screen and (max-width: 1279px) {
     .account__button {
-
         margin-bottom: 0
     }
 }
+
 @media screen and (max-width: 767px) {
     .account__button {
         padding: 8px 12px;
@@ -35,6 +37,7 @@
     height: 14px;
 
 }
+
 .account__button-text {
     text-decoration: none;
     font-weight: 400;

@@ -1,5 +1,6 @@
 import React from "react";
 
+import './Main.css';
 import Header from "../Header/Header";
 import Promo from "../Promo/Promo";
 import AboutProject from "../AboutProject/AboutProject";
@@ -10,7 +11,7 @@ import Footer from "../Footer/Footer";
 
 function Main() {
   return (
-    <>
+    <main className="main__container">
       <Header />
       <Promo />
       <AboutProject />
@@ -18,7 +19,7 @@ function Main() {
       <AboutMe />
       <Portfolio />
       <Footer />
-    </>
+    </main>
   );
 }
 

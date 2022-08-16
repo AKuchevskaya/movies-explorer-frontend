@@ -6,7 +6,9 @@ import "./MoviesCardList.css";
 function MoviesCardList() {
   return (
     <>
-      <div className="movies__container">
+      <div className='movies__container'>
+        <MoviesCard />
+        <MoviesCard />
         <MoviesCard />
       </div>
       <ButtonMore />

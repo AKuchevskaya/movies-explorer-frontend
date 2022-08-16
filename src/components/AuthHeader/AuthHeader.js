@@ -15,18 +15,18 @@ function AuthHeader() {
     setIsOpenedMenu(false);
   };
   return (
-    <div className="authorization__header">
+    <div className='authorization__header'>
       <Logo />
-      <div className="header__box_check">
-        <Link to="/movies" className="header__link_check" type="submit">
-          <p className="header__movies">Фильмы</p>
+      <div className='header__box_check'>
+        <Link to='/movies' className='header__link_check' type='submit'>
+          <p className='header__movies'>Фильмы</p>
         </Link>
-        <Link to="/saved-movies" className="header__link_check" type="submit">
-          <p className="header__saved-movies">Сохраненные фильмы</p>
+        <Link to='/saved-movies' className='header__link_check' type='submit'>
+          <p className='header__saved-movies'>Сохраненные фильмы</p>
         </Link>
         <AccountButton />
       </div>
-      <button className="header__menu" type="submit" onClick={openMenu}>
+      <button className='header__menu' type='submit' onClick={openMenu}>
         {/* <img src={menu} alt="Логотип меню" className="header__menu-icon" /> */}
       </button>
       {<Navigation isOpen={isOpenedMenu} onClose={closeMenu} />}

@@ -1,20 +1,22 @@
 .profile__content {
     width: calc(100% - 70px*2);
-    padding: 110px 70px 100px;
+    padding: 110px 70px 99px;
 }
+
 @media screen and (max-width: 1279px) {
     .profile__content {
         width: calc(100% - 50px*2);
         padding: 90px 50px;
     }
 }
-  
+
 @media screen and (max-width: 767px) {
     .profile__content {
         width: calc(100% - 14px*2);
         padding: 70px 14px 69px;
     }
 }
+
 .profile__container {
     list-style: none;
     display: flex;
@@ -23,11 +25,13 @@
     padding: 66px 0 0;
     position: relative;
 }
+
 @media screen and (max-width: 767px) {
     .profile__container {
         padding: 60px 0 0;
     }
 }
+
 .profile__name {
     margin: 0;
     padding: 0;
@@ -36,12 +40,14 @@
     line-height: 58px;
     letter-spacing: -0.04em;
 }
+
 @media screen and (max-width: 1279px) {
     .profile__name {
         font-size: 40px;
         line-height: 40px;
     }
 }
+
 @media screen and (max-width: 767px) {
     .profile__name {
         font-size: 30px;
@@ -49,6 +55,7 @@
         padding-top: 36px;
     }
 }
+
 .profile__photo {
     width: 270px;
     height: 327px;
@@ -59,12 +66,14 @@
     right: 0;
     border-radius: 10px;
 }
+
 @media screen and (max-width: 1279px) {
     .profile__photo {
         width: 255px;
         height: 307px;
     }
 }
+
 @media screen and (max-width: 767px) {
     .profile__photo {
         width: 292px;
@@ -81,6 +90,7 @@
     padding: 18px 0 26px;
     margin: 0;
 }
+
 @media screen and (max-width: 1279px) {
     .profile__about {
         font-size: 12px;
@@ -88,6 +98,7 @@
         padding: 16px 0 20px;
     }
 }
+
 @media screen and (max-width: 767px) {
     .profile__about {
         font-size: 11px;
@@ -95,6 +106,7 @@
         padding: 20px 0;
     }
 }
+
 .profile__text {
     max-width: 600px;
     font-weight: 400;
@@ -103,6 +115,7 @@
     mix-blend-mode: normal;
     margin: 0;
 }
+
 @media screen and (max-width: 1279px) {
     .profile__text {
         max-width: 364px;
@@ -110,6 +123,7 @@
         line-height: 18px;
     }
 }
+
 @media screen and (max-width: 767px) {
     .profile__text {
         max-width: 292px;
@@ -117,6 +131,7 @@
         line-height: 16px;
     }
 }
+
 .profile__social-pages {
     list-style: none;
     display: flex;
@@ -130,11 +145,13 @@
         padding: 87px 0 0;
     }
 }
+
 @media screen and (max-width: 767px) {
     .profile__social-pages {
         padding: 40px 0 0;
     }
 }
+
 .profile__social-page {
     padding: 0 20px 0 0;
     margin: 0;
@@ -144,13 +161,16 @@
     transition: opacity 0.5s linear;
     cursor: pointer;
 }
+
 .profile__social-page:last-child {
     padding: 0;
 }
+
 .profile__social-page:hover {
     opacity: 0.6;
     text-decoration: underline 2px #000000;
 }
+
 @media screen and (max-width: 767px) {
     .profile__social-page {
         padding-right: 26px;
