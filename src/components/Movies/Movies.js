@@ -6,6 +6,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import "./Movies.css";
+import filmsList  from '../../utils/filmsList';
 
 function Movies() {
   return (
@@ -13,7 +14,7 @@ function Movies() {
       <AuthHeader />
       <SearchForm />
       {/* <Preloader /> */}
-      <MoviesCardList />
+      <MoviesCardList movies={filmsList} />
       <Footer />
     </div>
   );

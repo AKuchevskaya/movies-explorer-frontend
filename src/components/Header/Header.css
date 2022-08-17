@@ -31,12 +31,6 @@
     margin: 0;
     padding: 0;
 }
-@media screen and (max-width: 767px) {
-    .header__box {
-        margin-top: 3px;
-    }
-}
-
 
 .header__link {
     transition: opacity 0.5s linear;
@@ -67,14 +61,6 @@
     padding: 8px 20px;
 }
 
-@media screen and (max-width: 767px) {
-    .header__registration {
-        font-size: 10px;
-        margin: 0 2px 0 0;
-        padding: 5px 12px;
-    }
-}
-
 .header__autorization {
     text-decoration: none;
     font-weight: 500;
@@ -86,8 +72,18 @@
 }
 
 @media screen and (max-width: 767px) {
+    .header__box {
+        margin-top: 3px;
+    }
+
     .header__autorization {
         font-size: 10px;
+        padding: 5px 12px;
+    }
+
+    .header__registration {
+        font-size: 10px;
+        margin: 0 2px 0 0;
         padding: 5px 12px;
     }
 }

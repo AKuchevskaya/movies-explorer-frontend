@@ -28,7 +28,7 @@ function AboutMe() {
         </article>
         <ul className="profile__social-pages">
             <li className="profile__social-page">
-                <a target="_blank">GitHub</a>
+                <a href='https://github.com/AKuchevskaya' rel='noreferrer' target="_blank">GitHub</a>
             </li>
             <li className="profile__social-page">
                 <a target="_blank">VKontakte</a>

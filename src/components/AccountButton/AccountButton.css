@@ -19,18 +19,6 @@
     opacity: .2;
 }
 
-@media screen and (max-width: 1279px) {
-    .account__button {
-        margin-bottom: 0
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .account__button {
-        padding: 8px 12px;
-    }
-}
-
 .account__button-icon {
     padding: 0 7px 0 0;
     width: 12px;
@@ -45,7 +33,17 @@
     text-align: right;
 }
 
+@media screen and (max-width: 1279px) {
+    .account__button {
+        margin-bottom: 0
+    }
+}
+
 @media screen and (max-width: 767px) {
+    .account__button {
+        padding: 8px 12px;
+    }
+
     .account__button-text {
         font-weight: 500;
     }

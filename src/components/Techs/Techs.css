@@ -3,19 +3,6 @@
     padding: 100px 70px;
 }
 
-@media screen and (max-width: 1279px) {
-    .techs__content {
-        padding: 90px 50px;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .techs__content {
-        background-color: #FFFFFF;
-        padding: 70px 18px;
-    }
-}
-
 .techs__list {
     display: grid;
     grid-template-rows: 1fr;
@@ -27,18 +14,6 @@
     margin: 0 auto;
 }
 
-@media screen and (max-width: 1279px) {
-    .techs__list {
-        padding: 80px 0 83px;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .techs__list {
-        padding: 60px 0 50px;
-    }
-}
-
 .techs__subtitle {
     font-weight: 400;
     font-size: 50px;
@@ -47,13 +22,6 @@
     letter-spacing: -0.04em;
     padding: 0;
     margin: 0;
-}
-
-@media screen and (max-width: 767px) {
-    .techs__subtitle {
-        font-size: 30px;
-        line-height: 36px;
-    }
 }
 
 .techs__discription {
@@ -67,22 +35,6 @@
     margin: 0;
 }
 
-@media screen and (max-width: 1279px) {
-    .techs__discription {
-        font-size: 12px;
-        line-height: 18px;
-        padding: 22px 0 0;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .techs__discription {
-        font-size: 11px;
-        line-height: 16px;
-        padding: 24px 0 0;
-    }
-}
-
 .techs__block {
     list-style: none;
     padding: 0;
@@ -92,20 +44,6 @@
     grid-template-columns: repeat(7, 90px);
     column-gap: 10px;
     justify-content: center;
-}
-
-@media screen and (max-width: 1279px) {
-    .techs__block {
-        grid-template-columns: repeat(7, 84px);
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .techs__block {
-        grid-template-rows: repeat(4, 1fr);
-        grid-template-columns: repeat(2, 84px);
-        gap: 10px;
-    }
 }
 
 .techs__item {
@@ -122,9 +60,55 @@
 }
 
 @media screen and (max-width: 1279px) {
+    .techs__content {
+        padding: 90px 50px;
+    }
+
+    .techs__list {
+        padding: 80px 0 83px;
+    }
+
+    .techs__discription {
+        font-size: 12px;
+        line-height: 18px;
+        padding: 22px 0 0;
+    }
+
+    .techs__block {
+        grid-template-columns: repeat(7, 84px);
+    }
+
     .techs__item {
         font-size: 12px;
         line-height: 15px;
         padding-bottom: 21px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .techs__content {
+        background-color: #FFFFFF;
+        padding: 70px 18px;
+    }
+
+    .techs__list {
+        padding: 60px 0 50px;
+    }
+
+    .techs__subtitle {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .techs__discription {
+        font-size: 11px;
+        line-height: 16px;
+        padding: 24px 0 0;
+    }
+
+    .techs__block {
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 84px);
+        gap: 10px;
     }
 }

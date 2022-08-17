@@ -5,31 +5,11 @@
     flex-direction: column;
 }
 
-@media screen and (max-width: 1279px) {
-    .account {
-        width: calc(100% - 30px*2);
-        padding: 18px 30px;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .account {
-        width: calc(100% - 14px*2);
-        padding: 18px 14px;
-    }
-}
-
 .account__content {
     display: flex;
     flex-direction: column;
     width: 410px;
     align-self: center;
-}
-
-@media screen and (max-width: 767px) {
-    .account__content {
-        width: 260px;
-    }
 }
 
 .account__title {
@@ -39,19 +19,6 @@
     font-size: 24px;
     line-height: 29px;
     text-align: center;
-
-}
-
-@media screen and (max-width: 1279px) {
-    .account__title {
-        padding: 250px 0 80px;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .account__title {
-        padding: 84px 0 64px;
-    }
 }
 
 .account__form {
@@ -104,12 +71,6 @@
     text-decoration: underline;
 }
 
-@media screen and (max-width: 1279px) {
-    .account__enter {
-        margin: 194px 0 16px;
-    }
-}
-
 .account__exit {
     outline: none;
     border: none;
@@ -126,4 +87,31 @@
 
 .account__exit:hover {
     text-decoration: underline;
+}
+
+
+@media screen and (max-width: 1279px) {
+    .account {
+        width: calc(100% - 30px*2);
+        padding: 18px 30px;
+    }
+    .account__title {
+        padding: 250px 0 80px;
+    }
+    .account__enter {
+        margin: 194px 0 16px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .account {
+        width: calc(100% - 14px*2);
+        padding: 18px 14px;
+    }
+    .account__content {
+        width: 260px;
+    }
+    .account__title {
+        padding: 84px 0 64px;
+    }
 }
