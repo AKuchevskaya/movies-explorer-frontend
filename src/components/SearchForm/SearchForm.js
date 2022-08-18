@@ -11,7 +11,7 @@ function SearchForm() {
           type='search'
           required
         ></input>
-        <button type='button' className='searchform__button'>
+        <button type='submit' className='searchform__button'>
           Найти
         </button>
       </div>

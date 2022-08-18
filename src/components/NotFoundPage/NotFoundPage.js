@@ -9,7 +9,7 @@ function NotFoundPage() {
         <p className='error__code'>404</p>
         <p className='error__text'>Страница не найдена</p>
       </div>
-      <Link className='link' to='/'>
+      <Link className='error__link' to='/'>
         Назад
       </Link>
     </div>
