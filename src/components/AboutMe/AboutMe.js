@@ -28,10 +28,10 @@ function AboutMe() {
         </article>
         <ul className="profile__social-pages">
             <li className="profile__social-page">
-                <a href='https://github.com/AKuchevskaya' rel='noreferrer' target="_blank">GitHub</a>
+                <a className="profile__social-page profile__link" href='https://github.com/AKuchevskaya' rel='noreferrer' target="_blank">GitHub</a>
             </li>
             <li className="profile__social-page">
-                <a target="_blank">VKontakte</a>
+                <a className="profile__social-page profile__link" href='https://vk.com/id1668434'  rel='noreferrer' target="_blank">VKontakte</a>
             </li>
         </ul>
         </section>

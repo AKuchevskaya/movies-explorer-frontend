@@ -34,11 +34,13 @@
     justify-content: space-between;
     transition: opacity 0.5s linear;
     cursor: pointer;
+    text-decoration: none;
+    color: #000000
 }
 
 .portfolio__project-link:hover {
     font-weight: 500;
-    outline: solid 2px #A0A0A0;
+    outline: solid 2px #000000;
     border-radius: 5px;
     opacity: 0.6;
 }
