@@ -1,5 +1,7 @@
-.account__button {
+.account__link {
     display: flex;
+    text-decoration: none;
+    color: #000000;
     font-size: 14px;
     line-height: 16px;
     box-sizing: border-box;
@@ -14,19 +16,19 @@
     opacity: .6;
 }
 
-.account__button:hover {
+.account__link:hover {
     font-weight: 500;
     opacity: .2;
 }
 
-.account__button-icon {
+.account__link-icon {
     padding: 0 7px 0 0;
     width: 12px;
     height: 14px;
 
 }
 
-.account__button-text {
+.account__link-text {
     text-decoration: none;
     font-weight: 400;
     margin: 0;
@@ -34,17 +36,17 @@
 }
 
 @media screen and (max-width: 1279px) {
-    .account__button {
+    .account__link {
         margin-bottom: 0
     }
 }
 
 @media screen and (max-width: 767px) {
-    .account__button {
+    .account__link {
         padding: 8px 12px;
     }
 
-    .account__button-text {
+    .account__link-text {
         font-weight: 500;
     }
 }

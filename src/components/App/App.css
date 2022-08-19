@@ -5,8 +5,6 @@
 	padding: 0;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 }
 
 .page__style {
@@ -17,7 +15,7 @@
 }
 
 
-@media screen and (max-width: 1279px) {
+/* @media screen and (max-width: 1279px) {
 	.page {
 		max-width: 768px;
 	}
@@ -27,4 +25,4 @@
 	.page {
 		max-width: 320px;
 	}
-}
+} */

@@ -1,22 +1,18 @@
 import React from "react";
 
-import AuthHeader from "../AuthHeader/AuthHeader";
 import SearchForm from "../SearchForm/SearchForm";
 // import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import Footer from "../Footer/Footer";
 import "./Movies.css";
-import filmsList  from '../../utils/filmsList';
+import filmsList from "../../utils/filmsList";
 
 function Movies() {
   return (
-    <div className='movie__container'>
-      <AuthHeader />
+    <main className='movies__container'>
       <SearchForm />
       {/* <Preloader /> */}
       <MoviesCardList movies={filmsList} />
-      <Footer />
-    </div>
+    </main>
   );
 }
 

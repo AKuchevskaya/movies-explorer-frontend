@@ -31,8 +31,8 @@ function MoviesCard(props) {
         <button
           type='button'
           onClick={handleAddMovie}
-          className={`movie__button-save ${
-            isSelectedFilm && "movie__button_active"
+          className={`${
+            isSelectedFilm ? "movie__button_active" : "movie__button-save"
           }`}
         >
           {!isSelectedFilm && "Сохранить"}
@@ -40,8 +40,7 @@ function MoviesCard(props) {
       ) : (
         <button
           type='button'
-          className='movie__button'
-          
+          className='movie__button-delete'
           onClick={handleRemoveMovie}
         />
       )}

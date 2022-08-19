@@ -1,6 +1,5 @@
 .portfolio {
-    width: calc(100% - 70px*2);
-    padding: 0 70px 110px;
+    padding: 0 70px 108px;
 }
 
 .portfolio__container {
@@ -75,9 +74,9 @@
 
 @media screen and (max-width: 1279px) {
     .portfolio {
-        width: calc(100% - 50px*2);
-        padding: 0 50px 90px;
+        padding: 0 50px 72px;
     }
+
     .portfolio__project {
         font-size: 28px;
     }
@@ -88,7 +87,6 @@
 
 @media screen and (max-width: 767px) {
     .portfolio {
-        width: calc(100% - 14px*2);
         padding: 0 14px 70px;
     }
     .portfolio__title {

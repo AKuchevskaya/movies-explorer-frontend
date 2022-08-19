@@ -1,4 +1,6 @@
 .authorization__header {
+    max-width: calc(100% - 70px*2);
+    padding: 18px 70px;
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -54,6 +56,10 @@
 }
 
 @media screen and (max-width: 1279px) {
+    .authorization__header {
+        max-width: calc(100% - 30px*2);
+        padding: 15px 30px;
+    }
     .header__box_check {
         display: none;
     }
@@ -61,7 +67,8 @@
 
 @media screen and (max-width: 767px) {
     .authorization__header {
-        padding: 0 4px;
+        max-width: calc(100% - 14px*2);
+        padding: 15px 14px;
     }
 
     .header__movies {

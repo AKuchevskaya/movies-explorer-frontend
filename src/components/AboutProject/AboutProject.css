@@ -1,5 +1,4 @@
 .content {
-    width: calc(100% - 70px*2);
     padding: 110px 70px;
 }
 
@@ -17,7 +16,7 @@
     border-bottom: 1px solid #000000;
 }
 
-.content__list {
+.content__columns {
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
@@ -82,11 +81,10 @@
 
 @media screen and (max-width: 1279px) {
     .content {
-        width: calc(100% - 50px*2);
         padding: 90px 50px;
     }
 
-    .content__list {
+    .content__columns {
         padding-bottom: 93px;
         gap: 30px;
     }
@@ -104,7 +102,6 @@
 
 @media screen and (max-width: 767px) {
     .content {
-        width: calc(100% - 18px*2);
         padding: 70px 18px;
     }
 
@@ -114,13 +111,13 @@
         padding-bottom: 28px;
     }
 
-    .content__list {
+    .content__columns {
         padding: 60px 0;
         grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr;
         gap: 56px;
     }
-
+    
     .content__subtitle {
         font-size: 18px;
         line-height: 22px;

@@ -1,7 +1,7 @@
 .searchform {
     display: flex;
     justify-content: space-between;
-    padding: 94px 0 82px;
+    padding: 76px 0 82px;
     border-bottom: 1px solid rgb(170, 170, 170, 0.2);
 }
 
@@ -49,7 +49,7 @@
     .searchform {
         flex-direction: column;
         align-items: center;
-        padding: 74px 0 55px;
+        padding: 58px 0 57px;
     }
     .searchform__search {
         width: 684px;
@@ -60,7 +60,7 @@
     .searchform {
         flex-direction: column;
         align-items: center;
-        padding: 74px 0 44px;
+        padding: 58px 0 44px;
     }
     .searchform__search {
         width: 280px;

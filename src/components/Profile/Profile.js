@@ -2,12 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./Profile.css";
-import AuthHeader from "../AuthHeader/AuthHeader";
 
 function Profile() {
   return (
-    <div className='account'>
-      <AuthHeader />
+    <main className='account'>
       <div className='account__content'>
         <p className='account__title'>Привет, Виталий!</p>
         <form className='account__form'>
@@ -47,7 +45,7 @@ function Profile() {
           Выйти из аккаунта
         </Link>
       </div>
-    </div>
+    </main>
   );
 }
 
