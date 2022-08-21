@@ -1,6 +1,8 @@
 .checkbox__container {
   display: flex;
   align-items: center;
+  
+  margin-left: 40px;
 }
 
 .checkbox__text {
@@ -61,7 +63,7 @@ input:checked+.checkbox__slider:before {
 
 @media screen and (max-width: 1279px) {
   .checkbox__container {
-    margin-top: 37px;
+    margin: 37px 0 0 0;
   }
   .checkbox__text {
     margin: 0 12px 0 0;

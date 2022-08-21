@@ -60,6 +60,7 @@
 
 .movie__button-delete:focus {
     border: 2px solid #000000;
+    outline: none;
 }
 
 .movie__button-save {
@@ -87,6 +88,7 @@
 
 .movie__button-save:focus {
     border: 2px solid  #000000;
+    outline: none;
 }
 
 .movie__button_active {
@@ -112,6 +114,7 @@
 }
 .movie__button_active:focus {
     border: 2px solid #F9F9F9;
+    outline: none;
 }
 
 @media screen and (max-width: 1279px) {

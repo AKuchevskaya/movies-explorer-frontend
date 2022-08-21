@@ -32,6 +32,12 @@
     text-decoration: underline 2px #000000;
     font-weight: 500;
 }
+.header__link_check:focus {
+    text-decoration: underline 2px #000000;
+    font-weight: 500;
+    outline: none;
+    border: none;
+}
 
 .header__movies {
     text-decoration: none;
@@ -86,6 +92,7 @@
 .header__menu {
     display: none;
     border: none;
+    outline: none;
     cursor: pointer;
     transition: opacity 0.5s linear;
     background-color: transparent;
@@ -94,7 +101,11 @@
 .header__menu:hover {
     opacity: 0.2;
 }
-
+.header__menu:focus {
+    opacity: 0.2;
+    border: 1.5px solid #AAAAAA;
+    border-radius: 3px;
+}
 .header__menu-icon {
     width: 44px;
     height: 44px;

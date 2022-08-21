@@ -10,7 +10,7 @@ function Navigation({ isOpen, onClose }) {
     <div className={`nav__container ${isOpen ? "nav__container_opened" : ""}`}>
       <div className='nav__overlay'></div>
       <nav className={`nav__menu ${isOpen ? "nav__menu_opened" : ""}`}>
-        <button className='nav__close' type='submit' onClick={onClose}>
+        <button className='nav__close' type='button' onClick={onClose}>
           <img
             src={iconClose}
             alt='Кнопка закрытия'

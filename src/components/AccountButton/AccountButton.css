@@ -19,8 +19,13 @@
 .account__link:hover {
     font-weight: 500;
     opacity: .2;
+    border: 2px solid #000000;
 }
-
+.account__link:focus {
+    font-weight: 500;
+    opacity: .2;
+    border: 2px solid #000000;
+}
 .account__link-icon {
     padding: 0 7px 0 0;
     width: 12px;

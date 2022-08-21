@@ -26,9 +26,9 @@ function AboutMe() {
           </p>
         </div>
       </article>
-      <nav className='profile__social-pages'>
+      <nav className='profile__links'>
         <a
-          className='profile__social-page profile__link'
+          className='profile__link'
           href='https://github.com/AKuchevskaya'
           rel='noreferrer'
           target='_blank'
@@ -36,7 +36,7 @@ function AboutMe() {
           GitHub
         </a>
         <a
-          className='profile__social-page profile__link'
+          className='profile__link'
           href='https://vk.com/id1668434'
           rel='noreferrer'
           target='_blank'

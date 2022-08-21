@@ -53,6 +53,11 @@
     background-color: #000000;
     color: #FFFFFF;
 }
+.promo__link:focus {
+    opacity: 0.6;
+    background-color: #000000;
+    color: #FFFFFF;
+}
 
 @media screen and (max-width: 1279px) {
     .promo {

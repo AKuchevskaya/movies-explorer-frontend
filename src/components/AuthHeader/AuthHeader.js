@@ -26,7 +26,7 @@ function AuthHeader() {
         </Link>
         <AccountButton />
       </div>
-      <button className='header__menu' type='submit' onClick={openMenu}>
+      <button className='header__menu' type='button' onClick={openMenu}>
         {/* <img src={menu} alt="Логотип меню" className="header__menu-icon" /> */}
       </button>
       {<Navigation isOpen={isOpenedMenu} onClose={closeMenu} />}
