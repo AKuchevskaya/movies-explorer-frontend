@@ -1,16 +1,34 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 import ButtonMore from "../ButtonMore/ButtonMore";
 import "./MoviesCardList.css";
+import { useEffect, useState } from "react";
 
-function MoviesCardList(props) {
-  const movies = props.movies;
+function MoviesCardList({ moviesFromApi, valueInputSearchForm }) {
+  const [filteredMovies, setFilteredMovies] = useState([]);
+
+  const changeMoviesCardList = () => {
+    const filteredMovies = moviesFromApi.filter((i) =>
+    i.nameRU.toLowerCase().includes(valueInputSearchForm)
+   );
+   setFilteredMovies(filteredMovies)
+  }
+useEffect(() => {
+  changeMoviesCardList();
+},[valueInputSearchForm])
+
+  // console.log("filteredMovies", filteredMovies);
+  // //  const changeMovies = (moviesFromApi) => {
+  //  console.log("moviesFromApi2", moviesFromApi);
+  // //  //setSearchedMovies(filteredMovies);
+  // //  }
 
   return (
     <>
       <div className='movies__list'>
-        {movies.map((movie) => (
-          <MoviesCard movie={movie} key={movie.movieId} />
-        ))}
+        {filteredMovies
+          .map((movie) => (
+            <MoviesCard movie={movie} key={movie.movieId} />
+          ))}
       </div>
       <ButtonMore />
     </>

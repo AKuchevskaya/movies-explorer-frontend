@@ -1,21 +1,27 @@
-import { React, useState } from "react";
+import  React, { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+
 
 import "./MoviesCard.css";
 
-function MoviesCard(props) {
-  const movie = props.movie;
+function MoviesCard({ movie }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  //console.log("one", movie);
+  //const MAIN_URL = 'https://api.nomoreparties.co';
 
   const location = useLocation();
-  const [isSelectedFilm, setIsSelectedFilm] = useState();
+  const [isLiked, setIsLiked] = useState();
 
   const handleAddMovie = () => {
-    setIsSelectedFilm(!isSelectedFilm);
+    setIsLiked(!isLiked);
   };
 
   const handleRemoveMovie = () => {
-    setIsSelectedFilm(false);
+    setIsLiked(false);
   };
+  
   return (
     <div className='movie__box'>
       <div className='movie__header'>
@@ -23,6 +29,7 @@ function MoviesCard(props) {
         <p className='movie__time'>{movie.duration} минут</p>
       </div>
       <img
+        // src={`${MAIN_URL}${movie.image.url}`}
         src={movie.image}
         className='movie__picture'
         alt='Стоп-кадр фильма'
@@ -32,10 +39,10 @@ function MoviesCard(props) {
           type='button'
           onClick={handleAddMovie}
           className={`${
-            isSelectedFilm ? "movie__button_active" : "movie__button-save"
+            isLiked ? "movie__button_active" : "movie__button-save"
           }`}
         >
-          {!isSelectedFilm && "Сохранить"}
+          {!isLiked && "Сохранить"}
         </button>
       ) : (
         <button

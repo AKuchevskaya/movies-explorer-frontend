@@ -7,6 +7,7 @@
     padding: 70px 0;
     max-width: 396px;
     width: 100%;
+    align-self: center;
 }
 
 .login__title {
@@ -34,6 +35,9 @@
 }
 
 .login__button:hover {
+    opacity: 0.6;
+}
+.login__button_disebled {
     opacity: 0.6;
 }
 

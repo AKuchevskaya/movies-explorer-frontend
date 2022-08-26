@@ -1,20 +1,19 @@
 .account {
-    width: calc(100% - 70px*2);
-    padding: 18px 70px;
     display: flex;
     flex-direction: column;
+    max-width: 410px;
+    width: 100%;
+    margin: 0 auto 70px;
 }
 
 .account__content {
     display: flex;
     flex-direction: column;
-    width: 410px;
-    align-self: center;
 }
 
 .account__title {
     margin: 0;
-    padding: 236px 0 108px;
+    padding: 71px 0 106px;
     font-weight: 500;
     font-size: 24px;
     line-height: 29px;
@@ -52,6 +51,10 @@
     font-weight: 500;
     font-size: 11px;
     line-height: 13px;
+}
+.account__buttons {
+    display: flex;
+    flex-direction: column;
 }
 
 .account__enter {
@@ -92,26 +95,25 @@
 
 @media screen and (max-width: 1279px) {
     .account {
-        width: calc(100% - 30px*2);
-        padding: 18px 30px;
+        justify-content: space-between;
+        height: calc(100vh - 109px);
     }
     .account__title {
-        padding: 250px 0 80px;
+        padding: 235px 0 80px;
     }
     .account__enter {
-        margin: 194px 0 16px;
+        margin: 0 0 16px;
     }
 }
 
 @media screen and (max-width: 767px) {
     .account {
-        width: calc(100% - 14px*2);
-        padding: 18px 14px;
+        max-width: 260px;
+        height: calc(100vh - 114px);
+        margin-bottom: 40px;
     }
-    .account__content {
-        width: 260px;
-    }
+    
     .account__title {
-        padding: 84px 0 64px;
+        padding: 69px 0 64px;
     }
 }
