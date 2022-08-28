@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./Main.css";
 import Header from "../Header/Header";
@@ -8,11 +8,15 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 import Footer from "..//Footer/Footer";
+import AuthHeader from "../AuthHeader/AuthHeader";
 
-function Main() {
+function Main({loggedIn}) {
+  
+
   return (
     <>
-      <Header />
+    {loggedIn ? <AuthHeader /> : <Header />}
+      
       <main className='main__container'>
         <Promo />
         <AboutProject />

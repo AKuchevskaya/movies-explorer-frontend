@@ -7,6 +7,9 @@
     align-items: center;
     position: relative;
 }
+.authorization__header_style {
+    background-color: #F3C1F8;
+}
 
 .header__box_check {
     display: flex;

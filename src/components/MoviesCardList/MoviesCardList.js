@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 function MoviesCardList({ moviesFromApi, valueInputSearchForm }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  const changeMoviesCardList = () => {
-    const filteredMovies = moviesFromApi.filter((i) =>
-    i.nameRU.toLowerCase().includes(valueInputSearchForm)
-   );
-   setFilteredMovies(filteredMovies)
-  }
-useEffect(() => {
-  changeMoviesCardList();
-},[valueInputSearchForm])
+//   const changeMoviesCardList = () => {
+//     const filteredMovies = moviesFromApi.filter((i) =>
+//     i.nameRU.toLowerCase().includes(valueInputSearchForm)
+//    );
+//    setFilteredMovies(filteredMovies)
+//   }
+// useEffect(() => {
+//   changeMoviesCardList();
+// },[valueInputSearchForm])
 
   // console.log("filteredMovies", filteredMovies);
   // //  const changeMovies = (moviesFromApi) => {
@@ -25,7 +25,7 @@ useEffect(() => {
   return (
     <>
       <div className='movies__list'>
-        {filteredMovies
+        {moviesFromApi
           .map((movie) => (
             <MoviesCard movie={movie} key={movie.movieId} />
           ))}

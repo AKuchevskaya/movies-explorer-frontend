@@ -11,32 +11,32 @@ import Header from "../Header/Header";
 import AuthHeader from "../AuthHeader/AuthHeader";
 import Footer from "../Footer/Footer";
 
-function Movies({ loggedIn,moviesFromApi,
+function Movies({
+  loggedIn,
+  moviesFromApi,
   valueInputSearchForm,
- 
-  handleInput }) {
- //   const [searchedMovies, setSearchedMovies] = useState([]);
 
-
-
+  handleInput,
+}) {
+  //   const [searchedMovies, setSearchedMovies] = useState([]);
 
   return (
     <>
-    {loggedIn ? <AuthHeader/> : <Header/>}
-    <main className='movies__container'>
-      <SearchForm
-        valueInputSearchForm={valueInputSearchForm}
-       
-        handleInput={handleInput}
-        
-      />
-      {/* <Preloader /> */}
-        
-      <MoviesCardList moviesFromApi={moviesFromApi} valueInputSearchForm={valueInputSearchForm} />
-    </main>
-    <Footer/>
+      {loggedIn ? <AuthHeader /> : <Header />}
+      <main className='movies__container'>
+        <SearchForm
+          valueInputSearchForm={valueInputSearchForm}
+          handleInput={handleInput}
+        />
+        {/* <Preloader /> */}
+
+        <MoviesCardList
+          moviesFromApi={moviesFromApi}
+          valueInputSearchForm={valueInputSearchForm}
+        />
+      </main>
+      <Footer />
     </>
-    
   );
 }
 

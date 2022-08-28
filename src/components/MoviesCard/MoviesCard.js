@@ -1,12 +1,10 @@
 import  React, { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 
 import "./MoviesCard.css";
 
 function MoviesCard({ movie }) {
-  const currentUser = useContext(CurrentUserContext);
 
   //console.log("one", movie);
   //const MAIN_URL = 'https://api.nomoreparties.co';

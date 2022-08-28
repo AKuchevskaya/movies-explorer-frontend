@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../utils/Validation";
 import "./Register.css";
 import Logo from "../Logo/Logo";
+import Preloader from '../Preloader/Preloader';
 
-function Register({ handleRegister, errorResult }) {
+function Register({ handleRegister, errorResult, isPreloader }) {
   const { values, errors, isValid, handleChange } = useFormWithValidation();
   const errorRegexName =
     "Используйте только латиницу, киррилицу, тире и пробел";
   const regex = /(^[а-яА-ЯЁёa-zA-Z\s-]+$)+/i;
-  console.log("errorResult", errorResult);
+  // console.log("errorResult", errorResult);
   const handleSubmit = (event) => {
     event.preventDefault();
     handleRegister(values);
@@ -17,6 +18,7 @@ function Register({ handleRegister, errorResult }) {
   return (
     <div className='register'>
       <Logo />
+      {isPreloader && <Preloader />}
       <p className='register__title'>Добро пожаловать!</p>
       <form onSubmit={handleSubmit} className='form'>
         <label className='form__data' htmlFor='name'>
@@ -24,7 +26,7 @@ function Register({ handleRegister, errorResult }) {
         </label>
         <input
           onChange={handleChange}
-          className='form__input'
+          className={`${!regex.test(values.name) ? 'form__input form__input-wrong' : 'form__input'}`}
           id='name'
           name='name'
           type='text'
@@ -34,7 +36,7 @@ function Register({ handleRegister, errorResult }) {
           required
         />
         <span className='form__input-error'>
-          {!regex.test(values.name) ? errorRegexName : errors.name || ""}
+          {!regex.test(values.name) ? errorRegexName : (errors.name || "")}
         </span>
 
         <label className='form__data' htmlFor='email'>
@@ -42,7 +44,7 @@ function Register({ handleRegister, errorResult }) {
         </label>
         <input
           onChange={handleChange}
-          className='form__input'
+          className={`${errors.email ? 'form__input form__input-wrong' : 'form__input'}`}
           id='email'
           name='email'
           type='email'
@@ -57,7 +59,7 @@ function Register({ handleRegister, errorResult }) {
         </label>
         <input
           onChange={handleChange}
-          className='form__input'
+          className={`${errors.password ? 'form__input form__input-wrong' : 'form__input'}`}
           placeholder=' '
           id='password'
           name='password'

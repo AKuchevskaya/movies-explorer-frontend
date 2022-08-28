@@ -8,7 +8,7 @@ class MainApi {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res}`);
+    return res.ok ? res.json() : Promise.reject(`oшибка: ${res.status} ${res.statusText}`);
   }
   
 
@@ -37,6 +37,7 @@ class MainApi {
 
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
       headers: this._headers,
       credentials: "include", // посылает токен в куки вместе с запросом.
     }).then((res) => this._checkResponse(res));
@@ -48,7 +49,7 @@ class MainApi {
       headers: this._headers,
       body: JSON.stringify({
         name: userData.name,
-        about: userData.about,
+        email: userData.email,
       }),
       credentials: "include",
     }).then((res) => this._checkResponse(res));

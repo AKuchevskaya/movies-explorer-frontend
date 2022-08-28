@@ -52,6 +52,16 @@
     font-size: 11px;
     line-height: 13px;
 }
+
+.account__form-error {
+    color: #FF4062;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    min-height: 10px;
+    opacity: 1;
+    /* opacity: 0; */
+}
 .account__buttons {
     display: flex;
     flex-direction: column;
@@ -65,13 +75,22 @@
     font-size: 13px;
     line-height: 16px;
     text-align: center;
-    margin: 204px 0 16px;
+    margin: 0 0 16px;
     cursor: pointer;
     transition: opacity 0.5s linear;
 }
 
 .account__enter:hover {
     text-decoration: underline;
+}
+
+
+.account__style-error {
+    color: #FF4062;
+    cursor: default;
+}
+.account__style-error:hover {
+    text-decoration: none;
 }
 
 .account__exit {
@@ -99,7 +118,7 @@
         height: calc(100vh - 109px);
     }
     .account__title {
-        padding: 235px 0 80px;
+        padding: 0 0 80px;
     }
     .account__enter {
         margin: 0 0 16px;

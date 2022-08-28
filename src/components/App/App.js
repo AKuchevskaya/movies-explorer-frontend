@@ -4,9 +4,9 @@ import {
   Route,
   Redirect,
   useHistory,
-  useCookies,
+  
 } from "react-router-dom";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { CurrentDataContext } from "../../contexts/CurrentDataContext";
 
 import "./App.css";
 import { MOVIE_CARD_URL } from "../../utils/constants";
@@ -15,12 +15,10 @@ import * as Auth from "../../utils/Auth";
 import apiMain from "../../utils/MainApi";
 import apiMovies from "../../utils/MoviesApi";
 
-import Header from "../Header/Header";
-import AuthHeader from "../AuthHeader/AuthHeader";
+
 import filmsList from "../../utils/filmsList";
 import posterOne from "../../utils/filmsList";
 import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
@@ -30,83 +28,109 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentData, setCurrentData] = useState({
+    name: "",
+    email: "",
+    _id: "",
+  });
   const [moviesFromApi, setMoviesFromApi] = useState([filmsList]);
   const [movies, setMovies] = useState([]);
   const [valueInputSearchForm, setValueInputSearchForm] = useState("");
   const [errorResult, setErrorResult] = useState("");
   const [removedMovie, setRemovedMovie] = useState(null);
+
+  // !!! пока работаю над функциональностью поставила тру и отключила проверку токена, потом заменить на false
   const [loggedIn, setLoggedIn] = useState(false);
+
   const history = useHistory();
   const [userData, setUserData] = useState({}); // for component Profile, but we have currentUser
   const [errorMessage, setErrorMessage] = useState({});
   const [buttonState, setButtonState] = useState(true);
-  const [cookies, setCookie] = useState([]);
-  const tokenCheck = () => {
-    let token = localStorage.getItem("token");
+  const [isPreloader, setIsPreloader] = useState(false);
 
-    if (token) {
-      return Auth.getContent(token)
-        .then((res) => {
-          const userData = {...res, loggedIn} 
-          setLoggedIn(true);
-          setCurrentUser(userData);
-          console.log("gdfdngfm", res);
-          console.log("userData s loggedIn?", userData);
-          //setCurrentUser(res); or setUserData(res) ?
-          history.push("/movies");
-        })
-        .catch((err) => {
-          setErrorResult(err);
-          setLoggedIn(false);
-          console.log(`Проблема с правами доступа...: ${err}`);
-        });
-    }
+  const checkToken = () => {
+    return apiMain
+      .getProfile()
+      .then((res) => {
+        console.log("res", res);
+        setLoggedIn(true);
+        setCurrentData(res);
+      })
+
+      .catch((err) => {
+        setErrorResult(err);
+        console.log(`Проблема с правами доступа...: ${err}`);
+      });
   };
-  console.log("currentUser s loggedIn?", currentUser);
+  console.log("currentData posle checktoken", currentData);
 
   useEffect(() => {
-    tokenCheck();
-  }, [loggedIn]);
+    checkToken();
+  }, []);
 
-  
   const handleRegister = ({ name, email, password }) => {
     return Auth.register(name, email, password)
-      .then((data) => {
-        const { name, email } = data;
-        history.push("/signin");
-        setCurrentUser({ ...currentUser, name, email });
-        history.push("/signin");
+      .then(() => {
+        setIsPreloader(true);
+        handleLogin({ email, password });
       })
       .catch((err) => {
-        setErrorResult(`Прoблема авторизации: ${err}`);
+        setErrorResult(`Прoблема регистрации: ${err}`);
       })
-      .finally(() => console.log("errorResult", errorResult));
+      .finally(() => {
+        setIsPreloader(false);
+      });
   };
 
   const handleLogin = ({ email, password }) => {
     return Auth.authorize(email, password)
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          console.log("data v logine", data);
-
-        } else {
-          return;
-        }
-        tokenCheck();
+        setIsPreloader(true);
+        checkToken();
+        history.push("/movies");
       })
       .catch((err) => {
+        setErrorResult(`Прoблема авторизации: ${err}`);
+
         console.log(`Ошибка авторизации...: ${err}`);
+      })
+      .finally(() => {
+        setIsPreloader(false);
       });
   };
+
+  const handleUpdateUser = (userData) => {
+    apiMain
+      .editProfile(userData)
+      .then((userData) => {
+        setIsPreloader(true);
+        console.log("userData", userData);
+        setCurrentData(userData);
+      })
+      .catch((err) => {
+        setErrorResult(`Прoблема обновления данных: ${err}`);
+        console.log(`Ошибка обновления данных пользователя.....: ${err}`);
+      })
+      .finally(() => {
+        setIsPreloader(false);
+      });
+  };
+
   const signOut = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    //localStorage.removeItem("movies");
-    setLoggedIn(false);
-    history.push("/signin");
-  }
+    return Auth.signOut().then((res) => {
+      setIsPreloader(true);
+      console.log("res posle vihoda", res);
+      setLoggedIn(false);
+      history.push("/");
+    })
+    .catch((err) => {
+      console.log(`Проблема с выходом.....: ${err}`);
+
+    })
+    .finally(() => {
+      setIsPreloader(false);
+    })
+  };
   // -------------- логика обработки поиска фильма в массиве -----------
 
   // const getMoviesFromApi = () => {
@@ -126,8 +150,7 @@ function App() {
   //             data.image !== null
   //               ? `https://api.nomoreparties.co${data.image.url}`
   //               : posterOne,
-  //           trailer:
-  //             data.trailerLink ,
+  //           trailer: data.trailerLink,
   //           thumbnail:
   //             data.image !== null
   //               ? `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`
@@ -148,10 +171,10 @@ function App() {
   //   getMoviesFromApi();
   // }, [valueInputSearchForm]);
   //------------------------------------------
-  const handleInput = (e) => {
-    setValueInputSearchForm(e.target.value);
-    console.log(e.target.value);
-  };
+  // const handleInput = (e) => {
+  //   setValueInputSearchForm(e.target.value);
+  //   console.log(e.target.value);
+  // };
 
   // useEffect(() => {
   //   if (loggedIn) {
@@ -182,17 +205,16 @@ function App() {
   //     });
   // }
 
-  
-
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentDataContext.Provider value={currentData}>
       <div className='page page__style'>
         <Switch>
-          <Route exact path='/' loggedIn={loggedIn}>
-            <Main />
+          <Route exact path='/'>
+            <Main loggedIn={loggedIn} />
           </Route>
           <Route path='/signup'>
             <Register
+            isPreloader={isPreloader}
               handleRegister={handleRegister}
               errorResult={errorResult}
             />
@@ -203,35 +225,36 @@ function App() {
 
           <ProtectedRoute
             path='/profile'
-            component={Profile}
             loggedIn={loggedIn}
-            // handleUpdateUser={handleUpdateUser}
+            handleUpdateUser={handleUpdateUser}
+            errorResult={errorResult}
             signOut={signOut}
+            component={Profile}
           />
           <ProtectedRoute
-            exact
             path='/movies'
-            component={Movies}
             loggedIn={loggedIn}
             moviesFromApi={moviesFromApi}
             valueInputSearchForm={valueInputSearchForm}
-            handleInput={handleInput}
+            // handleInput={handleInput}
+            component={Movies}
           />
           <ProtectedRoute
             path='/saved-movies'
-            component={SavedMovies}
             loggedIn={loggedIn}
+            component={SavedMovies}
           />
 
-          <Route path='*'>
-            <NotFoundPage loggedIn={loggedIn} />
-          </Route>
           <Route>
-            {loggedIn ? <Redirect to='/movies' /> : <Redirect to='/' />}
+            {!loggedIn ? <Redirect to='/signin' /> : <Redirect to='/' />}
+          </Route>
+
+          <Route path='*'>
+            <NotFoundPage />
           </Route>
         </Switch>
       </div>
-    </CurrentUserContext.Provider>
+    </CurrentDataContext.Provider>
   );
 }
 
