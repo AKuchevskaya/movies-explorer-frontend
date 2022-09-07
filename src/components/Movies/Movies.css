@@ -4,7 +4,10 @@
     display: flex;
     flex-direction: column;
 }
-
+.movies__container-error {
+text-align: center;
+color: #FF4062;
+}
 @media screen and (max-width: 1279px) {
     .movies__container {
         max-width: calc(100% - 30px*2);

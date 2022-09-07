@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ isChecked, switchOffFilter }) {
+function FilterCheckbox({ changeFilterShortMovies }) {
  
   return (
     <div className='checkbox__container'>
@@ -11,8 +11,7 @@ function FilterCheckbox({ isChecked, switchOffFilter }) {
         <input
           type='checkbox'
           id='checkbox'
-          checked={isChecked}
-          onChange={switchOffFilter}
+          onChange={changeFilterShortMovies}
         />
         <div className='checkbox__slider checkbox__round'></div>
       </label>

@@ -12,14 +12,14 @@ class MainApi {
   }
   
 
-  removeSavedMovie(id) {
-    return fetch(`${this._baseUrl}/movies`, {
+  removeLikedMovie(_id) {
+    return fetch(`${this._baseUrl}/movies/${_id}`, {
       method: "DELETE",
       headers: this._headers,
       credentials: "include",
     }).then((res) => this._checkResponse(res));
   }
-  getSavedMovies() {
+  getLikedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
       headers: this._headers,
@@ -27,13 +27,16 @@ class MainApi {
     })
     .then((res) => this._checkResponse(res));
   }
-  addSavedMovie(id) {
+  addLikedMovie(movie) {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: this._headers,
+      body: JSON.stringify(movie),
       credentials: "include",
+       
     }).then((res) => this._checkResponse(res));
   }
+  
 
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {

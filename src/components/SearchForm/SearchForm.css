@@ -72,7 +72,9 @@
 .searchform__button:hover {
     opacity: 0.2;
 }
-
+.searchform__button_disebled {
+    opacity: 0.2;
+}
 @media screen and (max-width: 1279px) {
     .searchform {
         flex-direction: column;

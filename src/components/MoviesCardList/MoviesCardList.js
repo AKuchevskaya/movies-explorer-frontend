@@ -2,35 +2,63 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import ButtonMore from "../ButtonMore/ButtonMore";
 import "./MoviesCardList.css";
 import { useEffect, useState } from "react";
+import useWindowSize from "../UseWindowSize/useWindowSize";
 
-function MoviesCardList({ moviesFromApi, valueInputSearchForm }) {
-  const [filteredMovies, setFilteredMovies] = useState([]);
+function MoviesCardList({
+  movies,
+  selectedMovies,
+  
+  
+  handleLikeMovie,
+  handleDeleteMovie,
+}) {
+  const { width } = useWindowSize();
+  const [showMoviesList, setShowMoviesList] = useState([]);
+  const [amountMovies, setAmountMovies] = useState({ first: '', plus: '' });
 
-//   const changeMoviesCardList = () => {
-//     const filteredMovies = moviesFromApi.filter((i) =>
-//     i.nameRU.toLowerCase().includes(valueInputSearchForm)
-//    );
-//    setFilteredMovies(filteredMovies)
-//   }
-// useEffect(() => {
-//   changeMoviesCardList();
-// },[valueInputSearchForm])
+  // меняем количество фильмов на странице и количество добавления фильмов по нажатию кнопки в зависимости от ширины страницы
+  useEffect(() => {
+    width > 1280
+      ? setAmountMovies({ first: 12, plus: 3 })
+      : width > 480
+      ? setAmountMovies({ first: 8, plus: 2 })
+      : setAmountMovies({ first: 5, plus: 2 });
+  }, [width]);
 
-  // console.log("filteredMovies", filteredMovies);
-  // //  const changeMovies = (moviesFromApi) => {
-  //  console.log("moviesFromApi2", moviesFromApi);
-  // //  //setSearchedMovies(filteredMovies);
-  // //  }
-
+  // отрисовываем фильмы в зависимости от длинны массива(количества фильмов, отвечающих запросу)
+  useEffect(() => {
+    movies.length > amountMovies.first
+      ? setShowMoviesList(movies.slice(0, amountMovies.first).map((i) => i))
+      : setShowMoviesList(movies);
+  }, [movies.length]);
+  
+// функция добавляет фильмы по нажатию на кнопку "Еще"
+  const uploadMovies = () => {
+    const newShowMoviesList = movies
+      .slice(0, showMoviesList.length + amountMovies.plus)
+      .map((i) => i);
+    setShowMoviesList(newShowMoviesList);
+  };
   return (
     <>
       <div className='movies__list'>
-        {moviesFromApi
-          .map((movie) => (
-            <MoviesCard movie={movie} key={movie.movieId} />
-          ))}
+        {showMoviesList.map((movie) => (
+          <MoviesCard
+            movie={movie}
+            key={movie.movieId}
+            
+            selectedMovies={selectedMovies}
+            handleLikeMovie={handleLikeMovie}
+            handleDeleteMovie={handleDeleteMovie}
+            showMoviesList={showMoviesList}
+          />
+        ))}
       </div>
-      <ButtonMore />
+
+      {movies.length > amountMovies.first &&
+      movies.length !== showMoviesList.length ? (
+        <ButtonMore uploadMovies={uploadMovies} />
+      ) : null}
     </>
   );
 }

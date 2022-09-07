@@ -1,11 +1,5 @@
-import { React, useState, useEffect, useCallback } from "react";
-import {
-  Switch,
-  Route,
-  Redirect,
-  useHistory,
-  
-} from "react-router-dom";
+import { React, useState, useEffect } from "react";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { CurrentDataContext } from "../../contexts/CurrentDataContext";
 
 import "./App.css";
@@ -15,8 +9,6 @@ import * as Auth from "../../utils/Auth";
 import apiMain from "../../utils/MainApi";
 import apiMovies from "../../utils/MoviesApi";
 
-
-import filmsList from "../../utils/filmsList";
 import posterOne from "../../utils/filmsList";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -33,19 +25,17 @@ function App() {
     email: "",
     _id: "",
   });
-  const [moviesFromApi, setMoviesFromApi] = useState([filmsList]);
-  const [movies, setMovies] = useState([]);
-  const [valueInputSearchForm, setValueInputSearchForm] = useState("");
+  const [moviesFromApi, setMoviesFromApi] = useState([]);
+
   const [errorResult, setErrorResult] = useState("");
+  const [likedMovies, setLikedMovies] = useState([]);
   const [removedMovie, setRemovedMovie] = useState(null);
 
   // !!! пока работаю над функциональностью поставила тру и отключила проверку токена, потом заменить на false
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const history = useHistory();
-  const [userData, setUserData] = useState({}); // for component Profile, but we have currentUser
   const [errorMessage, setErrorMessage] = useState({});
-  const [buttonState, setButtonState] = useState(true);
   const [isPreloader, setIsPreloader] = useState(false);
 
   const checkToken = () => {
@@ -117,94 +107,127 @@ function App() {
   };
 
   const signOut = () => {
-    return Auth.signOut().then((res) => {
-      setIsPreloader(true);
-      console.log("res posle vihoda", res);
-      setLoggedIn(false);
-      history.push("/");
-    })
-    .catch((err) => {
-      console.log(`Проблема с выходом.....: ${err}`);
-
-    })
-    .finally(() => {
-      setIsPreloader(false);
-    })
+    return Auth.signOut()
+      .then((res) => {
+        setIsPreloader(true);
+        console.log("res posle vihoda", res);
+        alert("До свидания! Приходите ещё!");
+        setLoggedIn(false);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(`Проблема с выходом.....: ${err}`);
+      })
+      .finally(() => {
+        setIsPreloader(false);
+      });
   };
   // -------------- логика обработки поиска фильма в массиве -----------
+  // получаем весь массив фильмов с apiMovies, забираем только те поля, которые нам будут нужны
+  const getMoviesFromApi = () => {
+    setIsPreloader(true);
+    apiMovies
+      .getInitialMovies()
+      .then((res) => {
+        const moviesFromApi = res.map((data) => {
+          return {
+            nameRU: data.nameRU || data.nameEN || "Без названия",
+            nameEN: data.nameEN || data.nameRU || "Film without name",
+            country: data.country || "not found",
+            director: data.director || "not found",
+            duration: data.duration || 0,
+            year: data.year || 0,
+            description: data.description || "description not found",
+            image:
+              data.image !== null
+                ? `https://api.nomoreparties.co${data.image.url}`
+                : posterOne,
+            trailerLink: data.trailerLink,
+            thumbnail:
+              data.image !== null
+                ? `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`
+                : posterOne,
+            //id: data.id,
+            movieId: data.id,
+            // owner: currentData._id,
+          };
+        });
+        (moviesFromApi) && setIsPreloader(false);
+        setMoviesFromApi(moviesFromApi);
+        console.log('moviesFromApi', res)
+      })
+      .catch((err) => {
+        console.log(`Ошибка получения всех фильмов.....: ${err}`);
+      })
+      // .finally(() => {
+      //   setIsPreloader(false);
+      // });
+  };
+  //запрашиваем список фильмов при первой отрисовке
+  useEffect(() => {
+    getMoviesFromApi();
+    getLikedMovies();
+  }, []);
 
-  // const getMoviesFromApi = () => {
-  //   apiMovies
-  //     .getInitialMovies()
-  //     .then((res) => {
-  //       const moviesFromApi = res.map((data) => {
-  //         return {
-  //           nameRU: data.nameRU || data.nameEN || "Без названия",
-  //           nameEN: data.nameEN || data.nameRU || "Film without name",
-  //           country: data.country || "not found",
-  //           director: data.director || "not found",
-  //           duration: data.duration || 0,
-  //           year: data.year || 0,
-  //           description: data.description || "description not found",
-  //           image:
-  //             data.image !== null
-  //               ? `https://api.nomoreparties.co${data.image.url}`
-  //               : posterOne,
-  //           trailer: data.trailerLink,
-  //           thumbnail:
-  //             data.image !== null
-  //               ? `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`
-  //               : posterOne,
-  //           movieId: data.id,
-  //         };
-  //       });
-  //       setMoviesFromApi(moviesFromApi);
+  // ------------------------------------------
 
-  //       console.log("moviesFromApi", moviesFromApi);
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка получения всех фильмов.....: ${err}`);
-  //     });
-  // };
+  const getLikedMovies = () => {
+    apiMain
+      .getLikedMovies()
+      .then((res) => {
+        console.log("res na saved", res);
+        setLikedMovies(res);
+        setIsPreloader(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsPreloader(false);
+      });
+  };
 
-  // useEffect(() => {
-  //   getMoviesFromApi();
-  // }, [valueInputSearchForm]);
-  //------------------------------------------
-  // const handleInput = (e) => {
-  //   setValueInputSearchForm(e.target.value);
-  //   console.log(e.target.value);
-  // };
+  const handleLikeMovie = (movie) => {
+    //const isLiked = movie.owner === currentData._id;
+    apiMain
+      .addLikedMovie(movie)
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     Promise.all([
-  //       //в Promise.all передаем массив промисов которые нужно выполнить
-  //       apiMain.getSavedMovies(),
-  //       apiMain.getProfile(),
-  //     ])
-  //       .then(([movies, userData]) => {
-  //         setMovies(movies);
-  //         setCurrentUser(userData);
-  //         console.log("content erftghjhgf?????", userData);
-  //       })
-  //       .catch((err) => {
-  //         console.log(`Ошибка получения данных пользователя.....: ${err}`);
-  //       });
-  //   }
-  // }, [loggedIn]);
+      .then((newMovie) => {
+        //newMovie.movieId !== likedMovies.movieId &&
+        setLikedMovies([newMovie, ...likedMovies]);
 
-  // function handleUpdateUser(userData) {
-  //   apiMain
-  //     .editProfile(userData)
-  //     .then((userData) => {
-  //       setCurrentUser(userData);
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка обновления данных пользователя.....: ${err}`);
-  //     });
-  // }
+        localStorage.setItem(
+          "likedMovies",
+          JSON.stringify([newMovie, ...likedMovies])
+        );
+        console.log("newMovie", newMovie);
+      })
 
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeleteMovie = (movie) => {
+    setRemovedMovie(movie);
+    const likedMovies = JSON.parse(localStorage.getItem("likedMovies"));
+    apiMain
+      .removeLikedMovie(removedMovie._id)
+
+      .then(() => {
+        setLikedMovies((state) =>
+          state.filter((item) => item._id !== movie.movieId)
+        );
+
+        localStorage.setItem(
+          "savedMovies",
+          JSON.stringify(likedMovies.filter((i) => i._id !== movie.movieId))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <CurrentDataContext.Provider value={currentData}>
       <div className='page page__style'>
@@ -214,7 +237,7 @@ function App() {
           </Route>
           <Route path='/signup'>
             <Register
-            isPreloader={isPreloader}
+              isPreloader={isPreloader}
               handleRegister={handleRegister}
               errorResult={errorResult}
             />
@@ -234,14 +257,21 @@ function App() {
           <ProtectedRoute
             path='/movies'
             loggedIn={loggedIn}
+            getMoviesFromApi={getMoviesFromApi}
             moviesFromApi={moviesFromApi}
-            valueInputSearchForm={valueInputSearchForm}
-            // handleInput={handleInput}
+            isPreloader={isPreloader}
+            likedMovies={likedMovies}
+            handleLikeMovie={handleLikeMovie}
+            handleDeleteMovie={handleDeleteMovie}
             component={Movies}
           />
           <ProtectedRoute
             path='/saved-movies'
             loggedIn={loggedIn}
+            isPreloader={isPreloader}
+            likedMovies={likedMovies}
+            handleLikeMovie={handleLikeMovie}
+            handleDeleteMovie={handleDeleteMovie}
             component={SavedMovies}
           />
 
