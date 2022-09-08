@@ -6,9 +6,9 @@ import useWindowSize from "../UseWindowSize/useWindowSize";
 
 function MoviesCardList({
   movies,
-  selectedMovies,
+  likedMovies,
   
-  
+  addLikedMovie,
   handleLikeMovie,
   handleDeleteMovie,
 }) {
@@ -45,9 +45,10 @@ function MoviesCardList({
         {showMoviesList.map((movie) => (
           <MoviesCard
             movie={movie}
-            key={movie.movieId}
             
-            selectedMovies={selectedMovies}
+            key={movie.movieId}
+            addLikedMovie={addLikedMovie}
+            likedMovies={likedMovies}
             handleLikeMovie={handleLikeMovie}
             handleDeleteMovie={handleDeleteMovie}
             showMoviesList={showMoviesList}

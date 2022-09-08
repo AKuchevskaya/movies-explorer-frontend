@@ -3,7 +3,7 @@ import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { CurrentDataContext } from "../../contexts/CurrentDataContext";
 
 import "./App.css";
-import { MOVIE_CARD_URL } from "../../utils/constants";
+
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as Auth from "../../utils/Auth";
 import apiMain from "../../utils/MainApi";
@@ -30,8 +30,6 @@ function App() {
   const [errorResult, setErrorResult] = useState("");
   const [likedMovies, setLikedMovies] = useState([]);
   const [removedMovie, setRemovedMovie] = useState(null);
-
-  // !!! пока работаю над функциональностью поставила тру и отключила проверку токена, потом заменить на false
   const [loggedIn, setLoggedIn] = useState(true);
 
   const history = useHistory();
@@ -90,7 +88,7 @@ function App() {
   };
 
   const handleUpdateUser = (userData) => {
-    apiMain
+    return apiMain
       .editProfile(userData)
       .then((userData) => {
         setIsPreloader(true);
@@ -110,7 +108,9 @@ function App() {
     return Auth.signOut()
       .then((res) => {
         setIsPreloader(true);
-        console.log("res posle vihoda", res);
+        localStorage.removeItem("searchList");
+        localStorage.removeItem("seatchInput");
+        localStorage.removeItem("isChecked");
         alert("До свидания! Приходите ещё!");
         setLoggedIn(false);
         history.push("/");
@@ -122,7 +122,6 @@ function App() {
         setIsPreloader(false);
       });
   };
-  // -------------- логика обработки поиска фильма в массиве -----------
   // получаем весь массив фильмов с apiMovies, забираем только те поля, которые нам будут нужны
   const getMoviesFromApi = () => {
     setIsPreloader(true);
@@ -147,37 +146,39 @@ function App() {
               data.image !== null
                 ? `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`
                 : posterOne,
-            //id: data.id,
             movieId: data.id,
-            // owner: currentData._id,
           };
         });
-        (moviesFromApi) && setIsPreloader(false);
+        moviesFromApi && setIsPreloader(false);
         setMoviesFromApi(moviesFromApi);
-        console.log('moviesFromApi', res)
+        console.log("moviesFromApi", res);
       })
       .catch((err) => {
         console.log(`Ошибка получения всех фильмов.....: ${err}`);
       })
-      // .finally(() => {
-      //   setIsPreloader(false);
-      // });
+      .finally(() => {
+        setIsPreloader(false);
+      });
   };
   //запрашиваем список фильмов при первой отрисовке
   useEffect(() => {
     getMoviesFromApi();
-    getLikedMovies();
   }, []);
 
-  // ------------------------------------------
+  useEffect(() => {
+    getLikedMovies();
+  }, [currentData]);
 
   const getLikedMovies = () => {
-    apiMain
+    setIsPreloader(true);
+    return apiMain
       .getLikedMovies()
       .then((res) => {
-        console.log("res na saved", res);
-        setLikedMovies(res);
-        setIsPreloader(true);
+        const moviesFromServer = res.map((i) => i);
+        setLikedMovies(
+          moviesFromServer.filter((movie) => movie.owner === currentData._id)
+        );
+        // localStorage.setItem("likedMovies", JSON.stringify(likedMovies));
       })
       .catch((err) => {
         console.log(err);
@@ -187,47 +188,48 @@ function App() {
       });
   };
 
-  const handleLikeMovie = (movie) => {
-    //const isLiked = movie.owner === currentData._id;
+  function handleLikeMovie(movie) {
     apiMain
       .addLikedMovie(movie)
-
       .then((newMovie) => {
-        //newMovie.movieId !== likedMovies.movieId &&
+        console.log("newMovie", newMovie);
         setLikedMovies([newMovie, ...likedMovies]);
 
-        localStorage.setItem(
-          "likedMovies",
-          JSON.stringify([newMovie, ...likedMovies])
-        );
-        console.log("newMovie", newMovie);
+        // localStorage.setItem(
+        //   "likedMovies",
+        //   JSON.stringify([newMovie, ...likedMovies])
+        // );
       })
-
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка добавления новой карточки.....: ${err}`);
+      })
+      .finally(() => {
+        setIsPreloader(false);
       });
-  };
+  }
 
   const handleDeleteMovie = (movie) => {
-    setRemovedMovie(movie);
-    const likedMovies = JSON.parse(localStorage.getItem("likedMovies"));
     apiMain
-      .removeLikedMovie(removedMovie._id)
+      .removeLikedMovie(movie._id)
 
       .then(() => {
         setLikedMovies((state) =>
-          state.filter((item) => item._id !== movie.movieId)
+          state.filter((item) => item._id !== movie._id)
         );
 
-        localStorage.setItem(
-          "savedMovies",
-          JSON.stringify(likedMovies.filter((i) => i._id !== movie.movieId))
-        );
+        // localStorage.setItem(
+        //   "likedMovies",
+        //   JSON.stringify(likedMovies.filter((i) => i._id !== movie._id))
+        // );
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsPreloader(false);
       });
   };
+  console.log("likedMovies na app", likedMovies);
   return (
     <CurrentDataContext.Provider value={currentData}>
       <div className='page page__style'>
@@ -257,9 +259,8 @@ function App() {
           <ProtectedRoute
             path='/movies'
             loggedIn={loggedIn}
-            getMoviesFromApi={getMoviesFromApi}
-            moviesFromApi={moviesFromApi}
             isPreloader={isPreloader}
+            moviesFromApi={moviesFromApi}
             likedMovies={likedMovies}
             handleLikeMovie={handleLikeMovie}
             handleDeleteMovie={handleDeleteMovie}
@@ -269,6 +270,7 @@ function App() {
             path='/saved-movies'
             loggedIn={loggedIn}
             isPreloader={isPreloader}
+            moviesFromApi={moviesFromApi}
             likedMovies={likedMovies}
             handleLikeMovie={handleLikeMovie}
             handleDeleteMovie={handleDeleteMovie}

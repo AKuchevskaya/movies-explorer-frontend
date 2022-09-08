@@ -1,38 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./SavedMovies.css";
-//import bestFilmsList from "../../utils/bestFilmsList";
 import AuthHeader from "../AuthHeader/AuthHeader";
 import Footer from "../Footer/Footer";
-import apiMain from "../../utils/MainApi";
 import Preloader from "../Preloader/Preloader";
-
 
 function SavedMovies({
   isPreloader,
   likedMovies,
+  addLikedMovie,
   handleLikeMovie,
   handleDeleteMovie,
-  }) {
-  const location = useLocation();
-  
+}) {
   const [isChecked, setIsChecked] = useState(false);
-  const [movies, setMovies] = useState([]);
+  const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
   const [valueInputSearchForm, setValueInputSearchForm] = useState("");
-  const [notFoundMessage, setNotFoundMessage] = useState(
-    "Поиск не дал результата, введите другой запрос."
+  const [movies, setMovies] = useState([]);
+  const notFoundMessage = "Поиск не дал результата, введите другой запрос.";
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(
+    (e) => {
+      !valueInputSearchForm ? setIsValid(false) : setIsValid(true);
+    },
+    [valueInputSearchForm]
   );
+
+  useEffect(() => {
+    setMovies(likedMovies);
+  }, [likedMovies]);
+
+  // меняем значение нажатия кнопки поиска
+  const changeSearchButtonState = () => {
+    setIsSearchButtonClicked(!isSearchButtonClicked);
+  };
   const handleInput = (e) => {
     setValueInputSearchForm(e.target.value);
   };
-
-  const changeFilterShortMovies = () => {
-    setIsChecked(!isChecked);
-  };
-
+  // фильтруем в соответствии с запросом и положением переключателя короткометражек
   const filterMovies = () => {
     const filteredMovies = likedMovies
       .filter((i) => {
@@ -47,44 +53,62 @@ function SavedMovies({
         return i.duration < 40;
       })
       .map((i) => i);
-
-    filteredMovies.lenght !== 0 || shortMovies.lenght !== 0
-      ? isChecked
-        ? setMovies(shortMovies)
-        : setMovies(filteredMovies)
-      : setNotFoundMessage(notFoundMessage);
+    if (!isChecked) {
+      setMovies(filteredMovies);
+      localStorage.setItem("seatchInput", JSON.stringify(valueInputSearchForm));
+      localStorage.setItem("isChecked", JSON.stringify(isChecked));
+      localStorage.setItem("searchList", JSON.stringify(filteredMovies));
+    } else {
+      setMovies(shortMovies);
+      localStorage.setItem("seatchInput", JSON.stringify(valueInputSearchForm));
+      localStorage.setItem("isChecked", JSON.stringify(isChecked));
+      localStorage.setItem("searchList", JSON.stringify(shortMovies));
+    }
   };
 
-  useEffect(() => {
-    filterMovies();
-  }, [valueInputSearchForm, isChecked]);
+  // меняем значение переключателя фильтра короткометражек
+  const changeFilterShortMovies = () => {
+    setIsChecked(!isChecked);
+  };
 
-
+  // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
   const handleSearch = (e) => {
     e.preventDefault();
 
-    filterMovies();
-    
+    if (isSearchButtonClicked) {
+      filterMovies();
+    }
   };
   return (
     <>
       <AuthHeader />
       <main className='bestmovie__container'>
-        <SearchForm valueInputSearchForm={valueInputSearchForm}
+        <SearchForm
+          isValid={isValid}
+          valueInputSearchForm={valueInputSearchForm}
           handleInput={handleInput}
           handleSearch={handleSearch}
+          changeSearchButtonState={changeSearchButtonState}
           changeFilterShortMovies={changeFilterShortMovies}
-          isChecked={isChecked}/>
+        />
+        {!isValid && (
+          <span className='movies__container-error'>
+            Для начала поиска введите запрос
+          </span>
+        )}
         {isPreloader && <Preloader />}
-        {movies.length !== 0 ? (
+        {movies ? (
           <MoviesCardList
             movies={movies}
-            
+            likedMovies={likedMovies}
+            addLikedMovie={addLikedMovie}
             handleLikeMovie={handleLikeMovie}
             handleDeleteMovie={handleDeleteMovie}
           />
         ) : (
-          <span className='movies__container-error'>{notFoundMessage}</span>
+          notFoundMessage && (
+            <span className='movies__container-error'>{notFoundMessage}</span>
+          )
         )}
       </main>
       <Footer />

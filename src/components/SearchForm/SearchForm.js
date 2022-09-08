@@ -1,24 +1,15 @@
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { useState, useEffect } from "react";
 
 function SearchForm({
+  isValid,
+  changeSearchButtonState,
   handleSearch,
   handleInput,
   valueInputSearchForm,
   changeFilterShortMovies,
 }) {
-  const [isValid, setIsValid] = useState(false);
-
-  const searchMovies = () => {
-    handleSearch();
-  };
-  useEffect(
-    (e) => {
-      !valueInputSearchForm ? setIsValid(false) : setIsValid(true);
-    },
-    [valueInputSearchForm]
-  );
+  
   return (
     <form onSubmit={handleSearch} className='searchform'>
       <div className='searchform__search'>
@@ -29,8 +20,10 @@ function SearchForm({
           type='search'
           value={valueInputSearchForm}
           required
-        ></input>
+        >
+        </input>
         <button
+        onClick={changeSearchButtonState}
           type='submit'
           disabled={!isValid}
           className={`${
@@ -42,7 +35,6 @@ function SearchForm({
           Найти
         </button>
       </div>
-
       <FilterCheckbox changeFilterShortMovies={changeFilterShortMovies} />
     </form>
   );

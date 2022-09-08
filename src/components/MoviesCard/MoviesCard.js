@@ -1,46 +1,30 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import { CurrentDataContext } from "../../contexts/CurrentDataContext";
-
 import "./MoviesCard.css";
 
 function MoviesCard({
   movie,
-  showMoviesList,
-  selectedMovies,
+  likedMovies,
   handleLikeMovie,
   handleDeleteMovie,
 }) {
   const location = useLocation();
-  //console.log("one", movie);
-  //const MAIN_URL = 'https://api.nomoreparties.co';
 
-  const currentData = useContext(CurrentDataContext);
-  const [isSelected, setIsSelected] = useState(false);
-  // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = movie.owner === currentData._id;
+  // Определяем, выбран ли фильм для сохранения, текущим пользователем
+  const isSelected = movie.movieId && likedMovies.some(m => m.movieId === movie.movieId);
+  // Создаём переменную, которую после зададим в `className` для кнопки лайка
+  const movieButtonClassName = `${
+    isSelected ? "movie__button_active" : "movie__button-save"
+  }`;
 
-  // useEffect(()=>{
-  //   isSelected ?
-  //   handleLikeMovie(movie) :
-  //   handleDeleteMovie(movie)
-  // }, [isSelected])
-// функция меняет стейт фильма на выбранный и создает этот фильм в базе данных
+  // функция создает этот фильм в базе данных
   const likeMovie = () => {
-    setIsSelected(!isSelected);
-    handleLikeMovie(movie);
-    console.log("movie", movie);
-  };
+    isSelected ? handleDeleteMovie(likedMovies.filter((m) => m.movieId === movie.movieId)[0]) : handleLikeMovie(movie)
+  }
 
-  const changeClassName = () => {
-    setIsSelected(!isSelected);
-  };
-// функция удаляет фильм из базы данных и меняет стейт на невыбранный 
+  // функция удаляет фильм из базы данных
   const dislikeMovie = () => {
-    //setIsSelected(!isSelected);
-
-    //handleDeleteMovie(showMoviesList.filter((i) => i.movieId === movie.movieId))
-    isOwn && handleDeleteMovie(movie);
+    handleDeleteMovie(movie);
   };
 
   return (
@@ -56,17 +40,13 @@ function MoviesCard({
         alt='Стоп-кадр фильма'
       />
       {location.pathname === "/movies" ? (
-         (
-          <button
-            type='button'
-            onClick={likeMovie}
-            className={`${
-              !isSelected ? "movie__button-save" : "movie__button_active"
-            }`}
-          >
-            {!isSelected && 'Сохранить'}
-          </button>
-        )
+        <button
+          type='button'
+          onClick={likeMovie}
+          className={movieButtonClassName}
+        >
+          {!isSelected && "Сохранить"}
+        </button>
       ) : (
         <button
           type='button'

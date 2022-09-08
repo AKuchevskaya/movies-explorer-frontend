@@ -36,7 +36,6 @@ class MainApi {
        
     }).then((res) => this._checkResponse(res));
   }
-  
 
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
