@@ -1,5 +1,5 @@
-import {SERVER_URL} from '../utils/constants';
-// const SERVER_URL = "http://localhost:3001";
+// import { SERVER_URL } from "../utils/constants";
+const SERVER_URL = "http://localhost:3001";
 
 const checkResponse = (res) => {
   return res.ok
@@ -40,7 +40,7 @@ export const authorize = (email, password) => {
 
 export const signOut = () => {
   return fetch(`${SERVER_URL}/signout`, {
-    method: "DELETE",
+    method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

@@ -70,7 +70,10 @@ function SavedMovies({
   const changeFilterShortMovies = () => {
     setIsChecked(!isChecked);
   };
-
+  useEffect(() => {
+    isValid &&
+    filterMovies()
+  }, [isChecked]);
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
   const handleSearch = (e) => {
     e.preventDefault();

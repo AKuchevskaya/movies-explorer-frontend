@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import "./Main.css";
 import Header from "../Header/Header";
@@ -11,8 +11,6 @@ import Footer from "..//Footer/Footer";
 import AuthHeader from "../AuthHeader/AuthHeader";
 
 function Main({loggedIn}) {
-  
-
   return (
     <>
     {loggedIn ? <AuthHeader /> : <Header />}

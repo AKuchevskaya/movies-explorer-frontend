@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../utils/Validation";
 import "./Register.css";
@@ -10,7 +10,6 @@ function Register({ handleRegister, errorResult, isPreloader }) {
   const errorRegexName =
     "Используйте только латиницу, киррилицу, тире и пробел";
   const regex = /(^[а-яА-ЯЁёa-zA-Z\s-]+$)+/i;
-  // console.log("errorResult", errorResult);
   const handleSubmit = (event) => {
     event.preventDefault();
     handleRegister(values);

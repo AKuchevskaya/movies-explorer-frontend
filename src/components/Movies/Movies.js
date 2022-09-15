@@ -17,7 +17,7 @@ function Movies({
   const [isChecked, setIsChecked] = useState(false);
   const [movies, setMovies] = useState([]);
   const [valueInputSearchForm, setValueInputSearchForm] = useState("");
-  const notFoundMessage = "Поиск не дал результата, введите другой запрос.";
+  const [notFoundMessage, setNotFoundMessage] = useState("");
   const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
@@ -75,14 +75,19 @@ function Movies({
   const changeFilterShortMovies = () => {
     setIsChecked(!isChecked);
   };
-
+  useEffect(() => {
+    isValid &&
+    filterMovies()
+  }, [isChecked]);
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
   const handleSearch = (e) => {
     e.preventDefault();
-
     if (isSearchButtonClicked) {
       filterMovies();
-    }
+    } else if (movies.length === 0) {
+      setNotFoundMessage("Поиск не дал результата, введите другой запрос.");
+    } 
+    setNotFoundMessage("");
   };
 
   return (
@@ -103,18 +108,17 @@ function Movies({
           </span>
         )}
         {isPreloader && <Preloader />}
-        {movies.length > 0 ? (
-          <MoviesCardList
-            movies={movies}
-            likedMovies={likedMovies}
-            addLikedMovie={addLikedMovie}
-            handleLikeMovie={handleLikeMovie}
-            handleDeleteMovie={handleDeleteMovie}
-          />
-        ) : (
-          isSearchButtonClicked && (
-            <span className='movies__container-error'>{notFoundMessage}</span>
-          )
+
+        <MoviesCardList
+          movies={movies}
+          likedMovies={likedMovies}
+          addLikedMovie={addLikedMovie}
+          handleLikeMovie={handleLikeMovie}
+          handleDeleteMovie={handleDeleteMovie}
+        />
+
+        {isSearchButtonClicked && (
+          <span className='movies__container-error'>{notFoundMessage}</span>
         )}
       </main>
       <Footer />

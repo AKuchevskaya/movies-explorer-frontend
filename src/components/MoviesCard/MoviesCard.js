@@ -34,7 +34,6 @@ function MoviesCard({
         <p className='movie__time'>{movie.duration} минут</p>
       </div>
       <img
-        // src={`${MAIN_URL}${movie.image.url}`}
         src={movie.image}
         className='movie__picture'
         alt='Стоп-кадр фильма'

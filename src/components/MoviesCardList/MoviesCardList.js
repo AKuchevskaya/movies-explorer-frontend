@@ -7,7 +7,6 @@ import useWindowSize from "../UseWindowSize/useWindowSize";
 function MoviesCardList({
   movies,
   likedMovies,
-  
   addLikedMovie,
   handleLikeMovie,
   handleDeleteMovie,
@@ -30,7 +29,9 @@ function MoviesCardList({
     movies.length > amountMovies.first
       ? setShowMoviesList(movies.slice(0, amountMovies.first).map((i) => i))
       : setShowMoviesList(movies);
-  }, [movies.length]);
+//  }, [movies.length]);
+}, [movies, amountMovies]);
+
   
 // функция добавляет фильмы по нажатию на кнопку "Еще"
   const uploadMovies = () => {

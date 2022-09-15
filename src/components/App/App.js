@@ -26,15 +26,32 @@ function App() {
     _id: "",
   });
   const [moviesFromApi, setMoviesFromApi] = useState([]);
-
   const [errorResult, setErrorResult] = useState("");
   const [likedMovies, setLikedMovies] = useState([]);
-  const [removedMovie, setRemovedMovie] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(true);
-
+  const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState({});
   const [isPreloader, setIsPreloader] = useState(false);
+
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([
+        //в Promise.all передаем массив промисов которые нужно выполнить
+        apiMain.getLikedMovies(),
+        apiMain.getProfile(),
+      ])
+        .then(([films, data]) => {
+          const moviesFromServer = films.map((i) => i);
+          setLikedMovies(
+            moviesFromServer.filter((movie) => movie.owner === currentData._id)
+          );
+          setCurrentData(data);
+        })
+        .catch((err) => {
+          setErrorResult(`Проблема получения данных пользователя...: ${err}`);
+          console.log(`Ошибка получения данных пользователя.....: ${err}`);
+        });
+    }
+  }, [loggedIn]);
 
   const checkToken = () => {
     return apiMain
@@ -44,55 +61,54 @@ function App() {
         setLoggedIn(true);
         setCurrentData(res);
       })
-
       .catch((err) => {
-        setErrorResult(err);
-        console.log(`Проблема с правами доступа...: ${err}`);
+        setErrorResult(`Проблема с правами доступа...: ${err}`);
+        console.log(`Ошибка доступа...: ${err}`);
       });
   };
-  console.log("currentData posle checktoken", currentData);
 
   useEffect(() => {
     checkToken();
-  }, []);
+  }, [loggedIn]);
 
   const handleRegister = ({ name, email, password }) => {
+    setIsPreloader(true);
     return Auth.register(name, email, password)
       .then(() => {
-        setIsPreloader(true);
         handleLogin({ email, password });
       })
       .catch((err) => {
         setErrorResult(`Прoблема регистрации: ${err}`);
+        console.log(`Ошибка регистрации: ${err}`);
       })
       .finally(() => {
         setIsPreloader(false);
+        setErrorResult("");
       });
   };
 
   const handleLogin = ({ email, password }) => {
+    setIsPreloader(true);
     return Auth.authorize(email, password)
       .then((data) => {
-        setIsPreloader(true);
         checkToken();
         history.push("/movies");
       })
       .catch((err) => {
         setErrorResult(`Прoблема авторизации: ${err}`);
-
         console.log(`Ошибка авторизации...: ${err}`);
       })
       .finally(() => {
         setIsPreloader(false);
+        setErrorResult("");
       });
   };
 
   const handleUpdateUser = (userData) => {
+    setIsPreloader(true);
     return apiMain
       .editProfile(userData)
       .then((userData) => {
-        setIsPreloader(true);
-        console.log("userData", userData);
         setCurrentData(userData);
       })
       .catch((err) => {
@@ -101,25 +117,22 @@ function App() {
       })
       .finally(() => {
         setIsPreloader(false);
+        setErrorResult("");
       });
   };
 
   const signOut = () => {
     return Auth.signOut()
-      .then((res) => {
-        setIsPreloader(true);
+      .then(() => {
+        history.push("/");
         localStorage.removeItem("searchList");
         localStorage.removeItem("seatchInput");
         localStorage.removeItem("isChecked");
         alert("До свидания! Приходите ещё!");
         setLoggedIn(false);
-        history.push("/");
       })
       .catch((err) => {
         console.log(`Проблема с выходом.....: ${err}`);
-      })
-      .finally(() => {
-        setIsPreloader(false);
       });
   };
   // получаем весь массив фильмов с apiMovies, забираем только те поля, которые нам будут нужны
@@ -149,9 +162,7 @@ function App() {
             movieId: data.id,
           };
         });
-        moviesFromApi && setIsPreloader(false);
         setMoviesFromApi(moviesFromApi);
-        console.log("moviesFromApi", res);
       })
       .catch((err) => {
         console.log(`Ошибка получения всех фильмов.....: ${err}`);
@@ -160,45 +171,18 @@ function App() {
         setIsPreloader(false);
       });
   };
-  //запрашиваем список фильмов при первой отрисовке
+  //запрашиваем список фильмов один раз при первой отрисовке
   useEffect(() => {
     getMoviesFromApi();
   }, []);
 
-  useEffect(() => {
-    getLikedMovies();
-  }, [currentData]);
-
-  const getLikedMovies = () => {
-    setIsPreloader(true);
-    return apiMain
-      .getLikedMovies()
-      .then((res) => {
-        const moviesFromServer = res.map((i) => i);
-        setLikedMovies(
-          moviesFromServer.filter((movie) => movie.owner === currentData._id)
-        );
-        // localStorage.setItem("likedMovies", JSON.stringify(likedMovies));
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsPreloader(false);
-      });
-  };
-
   function handleLikeMovie(movie) {
+    setIsPreloader(true);
     apiMain
       .addLikedMovie(movie)
       .then((newMovie) => {
         console.log("newMovie", newMovie);
         setLikedMovies([newMovie, ...likedMovies]);
-
-        // localStorage.setItem(
-        //   "likedMovies",
-        //   JSON.stringify([newMovie, ...likedMovies])
-        // );
       })
       .catch((err) => {
         console.log(`Ошибка добавления новой карточки.....: ${err}`);
@@ -216,11 +200,6 @@ function App() {
         setLikedMovies((state) =>
           state.filter((item) => item._id !== movie._id)
         );
-
-        // localStorage.setItem(
-        //   "likedMovies",
-        //   JSON.stringify(likedMovies.filter((i) => i._id !== movie._id))
-        // );
       })
       .catch((err) => {
         console.log(err);
@@ -229,7 +208,7 @@ function App() {
         setIsPreloader(false);
       });
   };
-  console.log("likedMovies na app", likedMovies);
+
   return (
     <CurrentDataContext.Provider value={currentData}>
       <div className='page page__style'>
@@ -237,7 +216,7 @@ function App() {
           <Route exact path='/'>
             <Main loggedIn={loggedIn} />
           </Route>
-          <Route path='/signup'>
+          {/* <Route path='/signup'>
             <Register
               isPreloader={isPreloader}
               handleRegister={handleRegister}
@@ -246,11 +225,12 @@ function App() {
           </Route>
           <Route path='/signin'>
             <Login handleLogin={handleLogin} errorResult={errorResult} />
-          </Route>
+          </Route> */}
 
           <ProtectedRoute
             path='/profile'
             loggedIn={loggedIn}
+            isPreloader={isPreloader}
             handleUpdateUser={handleUpdateUser}
             errorResult={errorResult}
             signOut={signOut}
@@ -277,8 +257,28 @@ function App() {
             component={SavedMovies}
           />
 
-          <Route>
-            {!loggedIn ? <Redirect to='/signin' /> : <Redirect to='/' />}
+          <Route path='/signin'>
+            {loggedIn ? (
+              <Redirect to='/' />
+            ) : (
+              <Login
+                isPreloader={isPreloader}
+                handleLogin={handleLogin}
+                errorResult={errorResult}
+              />
+            )}
+          </Route>
+
+          <Route path='/signup'>
+            {loggedIn ? (
+              <Redirect to='/' />
+            ) : (
+              <Register
+                isPreloader={isPreloader}
+                handleRegister={handleRegister}
+                errorResult={errorResult}
+              />
+            )}
           </Route>
 
           <Route path='*'>

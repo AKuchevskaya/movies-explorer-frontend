@@ -1,20 +1,21 @@
 import React from "react";
 import "./NotFoundPage.css";
-import { Link, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-function NotFoundPage({ loggedIn }) {
+function NotFoundPage() {
+  const history = useHistory();
   return (
     <div className='error'>
       <div className='error__message'>
         <p className='error__code'>404</p>
         <p className='error__text'>Страница не найдена</p>
       </div>
-      <Link
+      <button
         className='error__link'
-        {...(loggedIn ? <Redirect to='/' /> : <Redirect to='/signin' />)}
+        onClick={() => history.goBack()}
       >
         Назад
-      </Link>
+      </button>
     </div>
   );
 }
