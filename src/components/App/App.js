@@ -36,15 +36,17 @@ function App() {
     if (loggedIn) {
       Promise.all([
         //в Promise.all передаем массив промисов которые нужно выполнить
-        apiMain.getLikedMovies(),
+        
         apiMain.getProfile(),
+        apiMain.getLikedMovies(),
       ])
-        .then(([films, data]) => {
+        .then(([data, films ]) => {
+          setCurrentData(data);
+
           const moviesFromServer = films.map((i) => i);
           setLikedMovies(
             moviesFromServer.filter((movie) => movie.owner === currentData._id)
           );
-          setCurrentData(data);
         })
         .catch((err) => {
           setErrorResult(`Проблема получения данных пользователя...: ${err}`);
@@ -57,18 +59,25 @@ function App() {
     return apiMain
       .getProfile()
       .then((res) => {
-        console.log("res", res);
         setLoggedIn(true);
         setCurrentData(res);
       })
       .catch((err) => {
         setErrorResult(`Проблема с правами доступа...: ${err}`);
         console.log(`Ошибка доступа...: ${err}`);
+      })
+      .finally(() => {
+        setErrorResult("");
       });
   };
 
   useEffect(() => {
     checkToken();
+  }, [loggedIn]);
+  useEffect(() => {
+    if (loggedIn) {
+      history.push("/");
+    }
   }, [loggedIn]);
 
   const handleRegister = ({ name, email, password }) => {
@@ -174,7 +183,7 @@ function App() {
   //запрашиваем список фильмов один раз при первой отрисовке
   useEffect(() => {
     getMoviesFromApi();
-  }, []);
+  }, [loggedIn]);
 
   function handleLikeMovie(movie) {
     setIsPreloader(true);
@@ -227,6 +236,28 @@ function App() {
             <Login handleLogin={handleLogin} errorResult={errorResult} />
           </Route> */}
 
+          <Route path='/signin'>
+            {loggedIn ? (
+              <Redirect to='/movies' />
+            ) : (
+              <Login
+                isPreloader={isPreloader}
+                handleLogin={handleLogin}
+                errorResult={errorResult}
+              />
+            )}
+          </Route>
+          <Route path='/signup'>
+            {loggedIn ? (
+              <Redirect to='/movies' />
+            ) : (
+              <Register
+                isPreloader={isPreloader}
+                handleRegister={handleRegister}
+                errorResult={errorResult}
+              />
+            )}
+          </Route>
           <ProtectedRoute
             path='/profile'
             loggedIn={loggedIn}
@@ -256,30 +287,6 @@ function App() {
             handleDeleteMovie={handleDeleteMovie}
             component={SavedMovies}
           />
-
-          <Route path='/signin'>
-            {loggedIn ? (
-              <Redirect to='/' />
-            ) : (
-              <Login
-                isPreloader={isPreloader}
-                handleLogin={handleLogin}
-                errorResult={errorResult}
-              />
-            )}
-          </Route>
-
-          <Route path='/signup'>
-            {loggedIn ? (
-              <Redirect to='/' />
-            ) : (
-              <Register
-                isPreloader={isPreloader}
-                handleRegister={handleRegister}
-                errorResult={errorResult}
-              />
-            )}
-          </Route>
 
           <Route path='*'>
             <NotFoundPage />

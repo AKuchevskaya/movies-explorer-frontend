@@ -27,6 +27,11 @@ function Movies({
     },
     [valueInputSearchForm]
   );
+  useEffect(() => {
+    !isValid
+      ? setNotFoundMessage("Для начала поиска введите запрос")
+      : setNotFoundMessage("");
+  }, [isValid]);
   // меняем значение нажатия кнопки поиска
   const changeSearchButtonState = () => {
     setIsSearchButtonClicked(!isSearchButtonClicked);
@@ -75,19 +80,11 @@ function Movies({
   const changeFilterShortMovies = () => {
     setIsChecked(!isChecked);
   };
-  useEffect(() => {
-    isValid &&
-    filterMovies()
-  }, [isChecked]);
+
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
   const handleSearch = (e) => {
     e.preventDefault();
-    if (isSearchButtonClicked) {
-      filterMovies();
-    } else if (movies.length === 0) {
-      setNotFoundMessage("Поиск не дал результата, введите другой запрос.");
-    } 
-    setNotFoundMessage("");
+    filterMovies();
   };
 
   return (
@@ -102,24 +99,17 @@ function Movies({
           changeSearchButtonState={changeSearchButtonState}
           changeFilterShortMovies={changeFilterShortMovies}
         />
-        {!isValid && (
-          <span className='movies__container-error'>
-            Для начала поиска введите запрос
-          </span>
-        )}
         {isPreloader && <Preloader />}
-
-        <MoviesCardList
-          movies={movies}
-          likedMovies={likedMovies}
-          addLikedMovie={addLikedMovie}
-          handleLikeMovie={handleLikeMovie}
-          handleDeleteMovie={handleDeleteMovie}
-        />
-
-        {isSearchButtonClicked && (
-          <span className='movies__container-error'>{notFoundMessage}</span>
-        )}
+        <span className='movies__container-error'>{notFoundMessage}</span>
+        {movies ? (
+          <MoviesCardList
+            movies={movies}
+            likedMovies={likedMovies}
+            addLikedMovie={addLikedMovie}
+            handleLikeMovie={handleLikeMovie}
+            handleDeleteMovie={handleDeleteMovie}
+          />
+        ) : null}
       </main>
       <Footer />
     </>

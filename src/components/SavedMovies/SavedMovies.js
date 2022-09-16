@@ -17,7 +17,7 @@ function SavedMovies({
   const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
   const [valueInputSearchForm, setValueInputSearchForm] = useState("");
   const [movies, setMovies] = useState([]);
-  const notFoundMessage = "Поиск не дал результата, введите другой запрос.";
+  const [notFoundMessage, setNotFoundMessage] = useState("");
   const [isValid, setIsValid] = useState(false);
 
   useEffect(
@@ -26,6 +26,12 @@ function SavedMovies({
     },
     [valueInputSearchForm]
   );
+
+  useEffect(() => {
+    !isValid
+      ? setNotFoundMessage("Для начала поиска введите запрос")
+      : setNotFoundMessage("");
+  }, [isValid]);
 
   useEffect(() => {
     setMovies(likedMovies);
@@ -53,6 +59,7 @@ function SavedMovies({
         return i.duration < 40;
       })
       .map((i) => i);
+
     if (!isChecked) {
       setMovies(filteredMovies);
       localStorage.setItem("seatchInput", JSON.stringify(valueInputSearchForm));
@@ -70,18 +77,13 @@ function SavedMovies({
   const changeFilterShortMovies = () => {
     setIsChecked(!isChecked);
   };
-  useEffect(() => {
-    isValid &&
-    filterMovies()
-  }, [isChecked]);
+
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
   const handleSearch = (e) => {
     e.preventDefault();
-
-    if (isSearchButtonClicked) {
-      filterMovies();
-    }
+    filterMovies();
   };
+
   return (
     <>
       <AuthHeader />
@@ -94,12 +96,9 @@ function SavedMovies({
           changeSearchButtonState={changeSearchButtonState}
           changeFilterShortMovies={changeFilterShortMovies}
         />
-        {!isValid && (
-          <span className='movies__container-error'>
-            Для начала поиска введите запрос
-          </span>
-        )}
+
         {isPreloader && <Preloader />}
+        <span className='movies__container-error'>{notFoundMessage}</span>
         {movies ? (
           <MoviesCardList
             movies={movies}
@@ -108,11 +107,7 @@ function SavedMovies({
             handleLikeMovie={handleLikeMovie}
             handleDeleteMovie={handleDeleteMovie}
           />
-        ) : (
-          notFoundMessage && (
-            <span className='movies__container-error'>{notFoundMessage}</span>
-          )
-        )}
+        ) : null}
       </main>
       <Footer />
     </>
