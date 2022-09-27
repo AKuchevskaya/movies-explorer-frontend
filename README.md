@@ -8,4 +8,7 @@ https://github.com/AKuchevskaya/movies-explorer-frontend/pull/2
 https://films.kuchevskaya.nomoredomains.sbs  
 
 IP  
-84.201.153.214
+84.201.153.214  
+
+Ссылка на макет диплома в Figma  
+https://disk.yandex.ru/d/GRx3kXSIdBVp_g  

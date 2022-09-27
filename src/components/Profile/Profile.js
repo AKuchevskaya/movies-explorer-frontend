@@ -1,18 +1,24 @@
 import React, { useContext, useState, useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { CurrentDataContext } from "../../contexts/CurrentDataContext";
 import AuthHeader from "../AuthHeader/AuthHeader";
 import Preloader from "../Preloader/Preloader";
+import { regexName, regexEmail, errorRegexName, errorRegexEmail } from "../../utils/constants";
 import "./Profile.css";
 
 function Profile({ isPreloader, errorResult, handleUpdateUser, signOut }) {
   const currentData = useContext(CurrentDataContext);
-  const errorRegexName =
-    "Используйте только латиницу, киррилицу, тире и пробел";
-  const regex = /(^[а-яА-ЯЁёa-zA-Z\s-]+$)+/i;
+
   const [values, setValues] = useState(currentData);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const isCorrectRedact =
+    (values.name !== currentData.name || values.email !== currentData.email) &&
+    regexName.test(values.name) &&
+    regexEmail.test(values.email);
+
+  useEffect(() => {
+    isCorrectRedact ? setIsValid(true) : setIsValid(false);
+  }, [isCorrectRedact, values]);
 
   const handleChange = (event) => {
     const target = event.target;
@@ -36,14 +42,14 @@ function Profile({ isPreloader, errorResult, handleUpdateUser, signOut }) {
   useEffect(() => {
     setValues({ ...currentData, name: values.name, email: values.email });
     return resetForm();
-  }, []);
+  }, [currentData]);
 
   const handleSubmit = (e) => {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
     // Передаём значения управляемых компонентов во внешний обработчик
-    handleUpdateUser(values);
+    isValid && handleUpdateUser(values);
   };
   return (
     <>
@@ -56,9 +62,8 @@ function Profile({ isPreloader, errorResult, handleUpdateUser, signOut }) {
             <label className='account__form-label' htmlFor='name'>
               <p className='account__label-text'>Имя</p>
               <input
-                className=
-                {`${
-                 (errors.name || !regex.test(values.name))
+                className={`${
+                  !isValid
                     ? "account__form-input account__style-error"
                     : "account__form-input"
                 }`}
@@ -70,14 +75,13 @@ function Profile({ isPreloader, errorResult, handleUpdateUser, signOut }) {
                 minLength={2}
                 maxLength={30}
                 required
-                
               />
             </label>
             <label className='account__form-label' htmlFor='email'>
               <p className='account__label-text'>E-mail</p>
               <input
                 className={`${
-                  (errors.email) 
+                  !isValid
                     ? "account__form-input account__style-error"
                     : "account__form-input"
                 }`}
@@ -86,7 +90,6 @@ function Profile({ isPreloader, errorResult, handleUpdateUser, signOut }) {
                 type='email'
                 onChange={handleChange}
                 value={values.email || ""}
-                
                 minLength={2}
                 maxLength={30}
                 required
@@ -94,34 +97,35 @@ function Profile({ isPreloader, errorResult, handleUpdateUser, signOut }) {
             </label>
 
             <span className='account__form-error'>
-              {!regex.test(values.name) ? errorRegexName : errors.name || ""}
+              {!regexName.test(values.name)
+                ? errorRegexName
+                : errors.name || ""}
             </span>
-            <span className='account__form-error'>{errors.email}</span>
-            {(!isValid || errorResult !== "") && (
+            <span className='account__form-error'>
+              {!regexEmail.test(values.email)
+                ? errorRegexEmail
+                : errors.email || ""}
+            </span>
+            {errorResult !== "" && (
               <span className='account__form-error'>{errorResult}</span>
             )}
 
             <button
               className={`${
-                !isValid || !regex.test(values.name)
+                !isValid
                   ? "account__enter account__style-error"
                   : "account__enter"
               }`}
               type='submit'
-              disabled={!isValid || !regex.test(values.name)}
+              disabled={!isValid}
             >
               Редактировать
             </button>
           </form>
           <div className='account__buttons'>
-            <Link
-              to='/'
-              onClick={signOut}
-              className='account__exit'
-              type='submit'
-            >
+            <button onClick={signOut} className='account__exit' type='submit'>
               Выйти из аккаунта
-            </Link>
+            </button>
           </div>
         </div>
       </main>

@@ -7,48 +7,49 @@ import AuthHeader from "../AuthHeader/AuthHeader";
 import Footer from "../Footer/Footer";
 
 function Movies({
-  moviesFromApi,
   isPreloader,
   likedMovies,
   addLikedMovie,
   handleLikeMovie,
   handleDeleteMovie,
 }) {
-  const [isChecked, setIsChecked] = useState(false);
-  const [movies, setMovies] = useState([]);
-  const [valueInputSearchForm, setValueInputSearchForm] = useState("");
-  const [notFoundMessage, setNotFoundMessage] = useState("");
+  const [isChecked, setIsChecked] = useState(
+    JSON.parse(localStorage.getItem("isChecked"))
+  );
+  const [movies, setMovies] = useState(
+    [JSON.parse(localStorage.getItem("moviesFromApi"))] || []
+  );
+  const [valueInputSearchForm, setValueInputSearchForm] = useState(
+    JSON.parse(localStorage.getItem("searchInput")) || ""
+  );
+  const [validationMessage, setValidationFoundMessage] = useState("");
+  const [message, setMessage] = useState("");
   const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
-  useEffect(
-    (e) => {
-      !valueInputSearchForm ? setIsValid(false) : setIsValid(true);
-    },
-    [valueInputSearchForm]
-  );
   useEffect(() => {
     !isValid
-      ? setNotFoundMessage("Для начала поиска введите запрос")
-      : setNotFoundMessage("");
+      ? setValidationFoundMessage("Для начала поиска введите запрос")
+      : setValidationFoundMessage("");
   }, [isValid]);
-  // меняем значение нажатия кнопки поиска
-  const changeSearchButtonState = () => {
-    setIsSearchButtonClicked(!isSearchButtonClicked);
-  };
-  // при отрисовке страницы достаем данные из локольного хранилиша
-  useEffect(() => {
-    setMovies(JSON.parse(localStorage.getItem("searchList")));
-    setValueInputSearchForm(JSON.parse(localStorage.getItem("seatchInput")));
-    setIsChecked(JSON.parse(localStorage.getItem("isChecked")));
-  }, []);
 
   const handleInput = (e) => {
     setValueInputSearchForm(e.target.value);
   };
-
+  useEffect(
+    (e) => {
+      valueInputSearchForm === "" ? setIsValid(false) : setIsValid(true);
+      setMessage("");
+    },
+    [valueInputSearchForm]
+  );
+  // меняем значение нажатия кнопки поиска
+  const changeSearchButtonState = () => {
+    setIsSearchButtonClicked(!isSearchButtonClicked);
+  };
   // фильтруем в соответствии с запросом и положением переключателя короткометражек
   const filterMovies = () => {
+    const moviesFromApi = JSON.parse(localStorage.getItem("moviesFromApi"));
     const filteredMovies = moviesFromApi
       .filter((i) => {
         return i.nameRU
@@ -64,35 +65,57 @@ function Movies({
       .map((i) => i);
 
     if (!isChecked) {
-      setMovies(filteredMovies);
-      localStorage.setItem("seatchInput", JSON.stringify(valueInputSearchForm));
-      localStorage.setItem("isChecked", JSON.stringify(isChecked));
+      !filteredMovies ? setMessage(message) : setMovies(filteredMovies);
       localStorage.setItem("searchList", JSON.stringify(filteredMovies));
-    } else {
-      setMovies(shortMovies);
-      localStorage.setItem("seatchInput", JSON.stringify(valueInputSearchForm));
       localStorage.setItem("isChecked", JSON.stringify(isChecked));
+      localStorage.setItem("searchInput", JSON.stringify(valueInputSearchForm));
+    } else {
+      !shortMovies ? setMessage(message) : setMovies(shortMovies);
       localStorage.setItem("searchList", JSON.stringify(shortMovies));
+      localStorage.setItem("isChecked", JSON.stringify(isChecked));
+      localStorage.setItem("searchInput", JSON.stringify(valueInputSearchForm));
     }
   };
 
   // меняем значение переключателя фильтра короткометражек
   const changeFilterShortMovies = () => {
+   
     setIsChecked(!isChecked);
   };
 
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
   const handleSearch = (e) => {
     e.preventDefault();
-    filterMovies();
+    localStorage.getItem("moviesFromApi") &&
+      isSearchButtonClicked &&
+      filterMovies();
   };
 
+  useEffect(() => {
+    setMovies(JSON.parse(localStorage.getItem("searchList")));
+    setValueInputSearchForm(JSON.parse(localStorage.getItem("searchInput")));
+    setIsChecked(JSON.parse(localStorage.getItem("isChecked")));
+  }, []);
+
+  // // при отрисовке страницы достаем данные из локольного хранилища
+  //  useEffect(() => {
+
+  //  }, []);
+  useEffect(() => {
+    if (movies.length === 0) {
+      setMessage("Поиск не дал результатов, попробуйте еще раз");
+    } else setMessage("");
+  }, [movies]);
+  useEffect(() => {
+    filterMovies();
+  }, [isChecked]);
   return (
     <>
       <AuthHeader />
       <main className='movies__container'>
         <SearchForm
           isValid={isValid}
+          isChecked={isChecked}
           valueInputSearchForm={valueInputSearchForm}
           handleInput={handleInput}
           handleSearch={handleSearch}
@@ -100,8 +123,13 @@ function Movies({
           changeFilterShortMovies={changeFilterShortMovies}
         />
         {isPreloader && <Preloader />}
-        <span className='movies__container-error'>{notFoundMessage}</span>
-        {movies ? (
+
+        {validationMessage && (
+          <span className='movies__container-error'>{validationMessage}</span>
+        )}
+        {message && <span className='movies__container-error'>{message}</span>}
+
+        {movies && (
           <MoviesCardList
             movies={movies}
             likedMovies={likedMovies}
@@ -109,7 +137,7 @@ function Movies({
             handleLikeMovie={handleLikeMovie}
             handleDeleteMovie={handleDeleteMovie}
           />
-        ) : null}
+        )}
       </main>
       <Footer />
     </>

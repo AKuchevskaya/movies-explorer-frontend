@@ -29,7 +29,6 @@ function MoviesCardList({
     movies.length > amountMovies.first
       ? setShowMoviesList(movies.slice(0, amountMovies.first).map((i) => i))
       : setShowMoviesList(movies);
-//  }, [movies.length]);
 }, [movies, amountMovies]);
 
   

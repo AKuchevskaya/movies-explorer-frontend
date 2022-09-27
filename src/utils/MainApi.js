@@ -1,4 +1,4 @@
-import { SERVER_URL } from "../utils/constants";
+ import { SERVER_URL } from "../utils/constants";
 // const SERVER_URL = 'http://localhost:3001';
 
 class MainApi {

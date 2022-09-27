@@ -122,10 +122,10 @@
     text-decoration: underline 2px #000000;
 }
 
-/* .nav__link_active {
+.nav__link_active {
     font-weight: 500;
     text-decoration: underline 2px #000000;
-} */
+}
 
 @media screen and (max-width: 767px) {
     .nav__link {

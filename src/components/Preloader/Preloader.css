@@ -50,6 +50,7 @@
     height: 100%;
     z-index: 10;
     padding: 20px;
+    position: absolute;
 }
 
 .preloader__container {

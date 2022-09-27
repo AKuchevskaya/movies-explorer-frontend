@@ -17,7 +17,7 @@ function SavedMovies({
   const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
   const [valueInputSearchForm, setValueInputSearchForm] = useState("");
   const [movies, setMovies] = useState([]);
-  const [notFoundMessage, setNotFoundMessage] = useState("");
+  const [validationMessage, setValidationMessage] = useState("");
   const [isValid, setIsValid] = useState(false);
 
   useEffect(
@@ -26,16 +26,16 @@ function SavedMovies({
     },
     [valueInputSearchForm]
   );
+  useEffect(() => {
+   
+    setMovies(likedMovies)
+  }, [likedMovies]);
 
   useEffect(() => {
     !isValid
-      ? setNotFoundMessage("Для начала поиска введите запрос")
-      : setNotFoundMessage("");
+      ? setValidationMessage("Для начала поиска введите запрос")
+      : setValidationMessage("");
   }, [isValid]);
-
-  useEffect(() => {
-    setMovies(likedMovies);
-  }, [likedMovies]);
 
   // меняем значение нажатия кнопки поиска
   const changeSearchButtonState = () => {
@@ -62,21 +62,19 @@ function SavedMovies({
 
     if (!isChecked) {
       setMovies(filteredMovies);
-      localStorage.setItem("seatchInput", JSON.stringify(valueInputSearchForm));
-      localStorage.setItem("isChecked", JSON.stringify(isChecked));
-      localStorage.setItem("searchList", JSON.stringify(filteredMovies));
     } else {
       setMovies(shortMovies);
-      localStorage.setItem("seatchInput", JSON.stringify(valueInputSearchForm));
-      localStorage.setItem("isChecked", JSON.stringify(isChecked));
-      localStorage.setItem("searchList", JSON.stringify(shortMovies));
     }
   };
 
   // меняем значение переключателя фильтра короткометражек
   const changeFilterShortMovies = () => {
     setIsChecked(!isChecked);
+    
   };
+  useEffect(() => {
+    filterMovies();
+  }, [isChecked]);
 
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
   const handleSearch = (e) => {
@@ -94,11 +92,11 @@ function SavedMovies({
           handleInput={handleInput}
           handleSearch={handleSearch}
           changeSearchButtonState={changeSearchButtonState}
+          isChecked={isChecked}
           changeFilterShortMovies={changeFilterShortMovies}
         />
-
         {isPreloader && <Preloader />}
-        <span className='movies__container-error'>{notFoundMessage}</span>
+        {(validationMessage) && <span className='movies__container-error'>{validationMessage}</span>}
         {movies ? (
           <MoviesCardList
             movies={movies}

@@ -27,17 +27,27 @@ function MoviesCard({
     handleDeleteMovie(movie);
   };
 
+  const getDuration = (mins) => {
+    let hours = Math.trunc(mins/60);
+    let minutes = mins % 60;
+  
+    return hours + 'ч' + minutes + 'м';
+  };
+  
+ 
   return (
     <div className='movie__box'>
       <div className='movie__header'>
         <h4 className='movie__title'>{movie.nameRU}</h4>
-        <p className='movie__time'>{movie.duration} минут</p>
+        <p className='movie__time'>{getDuration(movie.duration)}</p>
       </div>
+      <a href={movie.trailerLink} target='_blank' rel="noreferrer">
       <img
         src={movie.image}
         className='movie__picture'
         alt='Стоп-кадр фильма'
       />
+      </a>
       {location.pathname === "/movies" ? (
         <button
           type='button'
