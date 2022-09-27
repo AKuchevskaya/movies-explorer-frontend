@@ -1,14 +1,14 @@
 .authorization__header {
-    max-width: calc(100% - 70px*2);
-    padding: 18px 70px;
+    /* max-width: calc(100% - 70px*2); */
+    padding: 18px 0;
+    
     display: flex;
     justify-content: space-between;
-    align-content: center;
-    align-items: center;
     position: relative;
 }
 .authorization__header_style {
     background-color: #F3C1F8;
+    padding: 18px 70px;
 }
 
 .header__box_check {
@@ -66,8 +66,8 @@
 
 @media screen and (max-width: 1279px) {
     .authorization__header {
-        max-width: calc(100% - 30px*2);
-        padding: 15px 30px;
+        /* max-width: calc(100% - 30px*2);*/
+         padding: 15px 30px;
     }
     .header__box_check {
         display: none;
@@ -76,7 +76,7 @@
 
 @media screen and (max-width: 767px) {
     .authorization__header {
-        max-width: calc(100% - 14px*2);
+        /* max-width: calc(100% - 14px*2);*/
         padding: 15px 14px;
     }
 

@@ -6,7 +6,6 @@ import "./AccountButton.css";
 
 function AccountButton() {
   return (
-    <>
     <Link className="account__link" to='/profile'>
       <img
         src={iconAccount}
@@ -15,8 +14,6 @@ function AccountButton() {
       />
       <p className="account__link-text">Аккаунт</p>
     </Link>
-    </>
-    
   );
 }
 

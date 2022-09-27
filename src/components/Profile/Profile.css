@@ -1,4 +1,10 @@
 .account {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+.account__container {
     display: flex;
     flex-direction: column;
     max-width: 410px;
@@ -113,7 +119,7 @@
 
 
 @media screen and (max-width: 1279px) {
-    .account {
+    .account__container {
         justify-content: space-between;
         height: calc(100vh - 109px);
     }
@@ -126,7 +132,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .account {
+    .account__container {
         max-width: 260px;
         height: calc(100vh - 114px);
         margin-bottom: 40px;

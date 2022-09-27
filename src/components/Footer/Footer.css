@@ -1,21 +1,25 @@
 .footer__container {
     display: flex;
     flex-direction: column;
-    max-width: calc(100% - 70px*2);
+    /* max-width: calc(100% - 70px*2);
+    padding: 79px 70px 20px; */
+    max-width: 100%;
     padding: 79px 70px 20px;
 }
 
 @media screen and (max-width: 1279px) {
     .footer__container {
         /* padding-top: 219px; */
-        max-width: calc(100% - 30px*2);
+        /* max-width: calc(100% - 30px*2);
+        padding: 79px 30px 20px; */
         padding: 79px 30px 20px;
     }
 }
 
 @media screen and (max-width: 767px) {
     .footer__container {
-        max-width: calc(100% - 10px*2);
+        /* max-width: calc(100% - 10px*2);
+        padding: 60px 10px 10px; */
         padding: 60px 10px 10px;
     }
 }

@@ -3,6 +3,7 @@ import ButtonMore from "../ButtonMore/ButtonMore";
 import "./MoviesCardList.css";
 import { useEffect, useState } from "react";
 import useWindowSize from "../UseWindowSize/useWindowSize";
+import { moviesOnPage, addedMoviesOnPage, widthPage } from "../../utils/constants";
 
 function MoviesCardList({
   movies,
@@ -17,11 +18,11 @@ function MoviesCardList({
 
   // меняем количество фильмов на странице и количество добавления фильмов по нажатию кнопки в зависимости от ширины страницы
   useEffect(() => {
-    width > 1280
-      ? setAmountMovies({ first: 12, plus: 3 })
-      : width > 480
-      ? setAmountMovies({ first: 8, plus: 2 })
-      : setAmountMovies({ first: 5, plus: 2 });
+    width > widthPage.xl
+      ? setAmountMovies({ first: moviesOnPage.xl, plus: addedMoviesOnPage.xl })
+      : width > widthPage.l
+      ? setAmountMovies({ first: moviesOnPage.l, plus: addedMoviesOnPage.l })
+      : setAmountMovies({ first: moviesOnPage.m, plus: addedMoviesOnPage.l });
   }, [width]);
 
   // отрисовываем фильмы в зависимости от длинны массива(количества фильмов, отвечающих запросу)
@@ -40,7 +41,7 @@ function MoviesCardList({
     setShowMoviesList(newShowMoviesList);
   };
   return (
-    <>
+    <div className="movies__bag">
       <div className='movies__list'>
         {showMoviesList.map((movie) => (
           <MoviesCard
@@ -60,7 +61,7 @@ function MoviesCardList({
       movies.length !== showMoviesList.length ? (
         <ButtonMore uploadMovies={uploadMovies} />
       ) : null}
-    </>
+    </div>
   );
 }
 

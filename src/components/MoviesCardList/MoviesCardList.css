@@ -1,3 +1,9 @@
+.movies__bag {
+	margin: 0 auto;
+	display: grid;
+	justify-content: center;
+	justify-items: center;
+}
 .movies__list {
 	margin: 0 auto;
 	display: grid;

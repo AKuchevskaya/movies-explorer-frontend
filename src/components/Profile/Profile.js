@@ -52,10 +52,10 @@ function Profile({ isPreloader, errorResult, handleUpdateUser, signOut }) {
     isValid && handleUpdateUser(values);
   };
   return (
-    <>
+    <section className='account'>
       <AuthHeader />
       {isPreloader && <Preloader />}
-      <main className='account'>
+      <main className='account__container'>
         <div className='account__content'>
           <p className='account__title'>Привет, {currentData.name}!</p>
           <form onSubmit={handleSubmit} className='account__form'>
@@ -129,7 +129,7 @@ function Profile({ isPreloader, errorResult, handleUpdateUser, signOut }) {
           </div>
         </div>
       </main>
-    </>
+    </section>
   );
 }
 

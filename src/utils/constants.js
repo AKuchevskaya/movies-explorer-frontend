@@ -10,3 +10,19 @@ export const regexLink = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\
   export const errorRegexName =
   "Используйте только латиницу, киррилицу, тире и пробел";
 export const errorRegexEmail = "Не корректный Email";
+
+export const moviesOnPage = {
+  xl: 12,
+  l: 8,
+  m: 5,
+}
+
+export const addedMoviesOnPage = {
+  xl: 3,
+  l: 2,
+}
+
+export const widthPage = {
+  xl: 1280,
+  l: 480,
+}

@@ -12,18 +12,15 @@ import AuthHeader from "../AuthHeader/AuthHeader";
 
 function Main({loggedIn}) {
   return (
-    <>
+    <main className='main__container'>
     {loggedIn ? <AuthHeader /> : <Header />}
-      
-      <main className='main__container'>
         <Promo />
         <AboutProject />
         <Techs />
         <AboutMe />
         <Portfolio />
-      </main>
       <Footer />
-    </>
+   </main>
   );
 }
 

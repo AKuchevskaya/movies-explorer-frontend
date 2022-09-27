@@ -110,9 +110,9 @@ function Movies({
     filterMovies();
   }, [isChecked]);
   return (
-    <>
+    <main className='movies__container'>
+    
       <AuthHeader />
-      <main className='movies__container'>
         <SearchForm
           isValid={isValid}
           isChecked={isChecked}
@@ -138,9 +138,9 @@ function Movies({
             handleDeleteMovie={handleDeleteMovie}
           />
         )}
-      </main>
+      
       <Footer />
-    </>
+      </main>
   );
 }
 

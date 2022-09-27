@@ -35,6 +35,7 @@ function App() {
   const [isPreloader, setIsPreloader] = useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [tooltip, setTooltip] = useState("");
+
   const checkToken = () => {
     apiMain
       .getProfile()
@@ -42,11 +43,12 @@ function App() {
         if (res) {
           setCurrentData(res);
           setLoggedIn(true);
+          history.push("/movies");
+        } else {
+          history.push("/signin");
         }
       })
-      .then((res) => {
-        history.push("/");
-      })
+
       .catch((err) => {
         setErrorResult(`Проблема с правами доступа...: ${err}`);
         console.log(`Ошибка доступа...: ${err}`);
@@ -55,6 +57,7 @@ function App() {
         setErrorResult("");
       });
   };
+ 
 
   useEffect(() => {
     checkToken();

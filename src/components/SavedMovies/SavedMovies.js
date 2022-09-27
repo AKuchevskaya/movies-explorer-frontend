@@ -83,9 +83,9 @@ function SavedMovies({
   };
 
   return (
-    <>
+    <main className='bestmovie__container'>
       <AuthHeader />
-      <main className='bestmovie__container'>
+      
         <SearchForm
           isValid={isValid}
           valueInputSearchForm={valueInputSearchForm}
@@ -106,9 +106,9 @@ function SavedMovies({
             handleDeleteMovie={handleDeleteMovie}
           />
         ) : null}
-      </main>
+     
       <Footer />
-    </>
+    </main>
   );
 }
 
