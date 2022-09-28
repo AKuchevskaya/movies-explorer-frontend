@@ -13,7 +13,7 @@ function SavedMovies({
   handleLikeMovie,
   handleDeleteMovie,
 }) {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isShort, setIsShort] = useState(false);
   const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
   const [valueInputSearchForm, setValueInputSearchForm] = useState("");
   const [movies, setMovies] = useState([]);
@@ -60,7 +60,7 @@ function SavedMovies({
       })
       .map((i) => i);
 
-    if (!isChecked) {
+    if (!isShort) {
       setMovies(filteredMovies);
     } else {
       setMovies(shortMovies);
@@ -69,12 +69,12 @@ function SavedMovies({
 
   // меняем значение переключателя фильтра короткометражек
   const changeFilterShortMovies = () => {
-    setIsChecked(!isChecked);
+    setIsShort(!isShort);
     
   };
   useEffect(() => {
     filterMovies();
-  }, [isChecked]);
+  }, [isShort]);
 
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
   const handleSearch = (e) => {
@@ -92,7 +92,7 @@ function SavedMovies({
           handleInput={handleInput}
           handleSearch={handleSearch}
           changeSearchButtonState={changeSearchButtonState}
-          isChecked={isChecked}
+          isShort={isShort}
           changeFilterShortMovies={changeFilterShortMovies}
         />
         {isPreloader && <Preloader />}

@@ -1,9 +1,7 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ changeFilterShortMovies, isChecked }) {
-  const location = useLocation();
+function FilterCheckbox({ changeFilterShortMovies, isShort }) {
  
   return (
     <div className='checkbox__container'>
@@ -12,7 +10,7 @@ function FilterCheckbox({ changeFilterShortMovies, isChecked }) {
         <input
           type='checkbox'
           id='checkbox'
-          checked={location.pathname === "/movies" ? (JSON.parse(localStorage.getItem("isChecked"))): (isChecked)} 
+          checked={isShort}
           onChange={changeFilterShortMovies}
         />
         <div className='checkbox__slider checkbox__round'></div>

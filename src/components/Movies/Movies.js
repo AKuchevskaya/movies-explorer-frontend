@@ -13,8 +13,7 @@ function Movies({
   handleLikeMovie,
   handleDeleteMovie,
 }) {
-
-  const [isChecked, setIsChecked] = useState(false);
+  const [isShort, setIsShort] = useState(null);
   const [movies, setMovies] = useState([]);
   const [valueInputSearchForm, setValueInputSearchForm] = useState("");
   const [validationMessage, setValidationFoundMessage] = useState("");
@@ -40,6 +39,7 @@ function Movies({
   // меняем значение нажатия кнопки поиска
   const changeSearchButtonState = () => {
     setIsSearchButtonClicked(!isSearchButtonClicked);
+    localStorage.setItem("searchInput", JSON.stringify(valueInputSearchForm));
   };
   // фильтруем в соответствии с запросом и положением переключателя короткометражек
   const filterMovies = (valueInputSearchForm) => {
@@ -57,7 +57,7 @@ function Movies({
       })
       .map((i) => i);
 
-    if (!isChecked) {
+    if (isShort === false) {
       if (filteredMovies.length === 0) {
         setValidationFoundMessage(
           "Поиск не дал результатов, попробуйте еще раз"
@@ -68,29 +68,27 @@ function Movies({
         setMovies(filteredMovies);
         setValidationFoundMessage("");
         localStorage.setItem("searchList", JSON.stringify(filteredMovies));
-        localStorage.setItem("isChecked", JSON.stringify(isChecked));
+        localStorage.setItem("isShort", JSON.stringify(false));
       }
-    } else {
+    } else if (isShort === true) {
       if (shortMovies.length === 0) {
         setValidationFoundMessage(
           "Поиск не дал результатов, попробуйте еще раз"
         );
         setMovies([]);
         localStorage.setItem("searchList", JSON.stringify(shortMovies));
-
       } else {
         setMovies(shortMovies);
         setValidationFoundMessage("");
         localStorage.setItem("searchList", JSON.stringify(shortMovies));
-        localStorage.setItem("isChecked", JSON.stringify(isChecked));
+        localStorage.setItem("isShort", JSON.stringify(true));
       }
     }
   };
 
   // меняем значение переключателя фильтра короткометражек
   const changeFilterShortMovies = () => {
-    setIsChecked(!isChecked);
-    filterMovies(valueInputSearchForm);
+    setIsShort(!isShort);
   };
 
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
@@ -98,23 +96,27 @@ function Movies({
     e.preventDefault();
     localStorage.getItem("moviesFromApi") &&
       isSearchButtonClicked &&
-      localStorage.setItem("searchInput", JSON.stringify(valueInputSearchForm));
-    filterMovies(valueInputSearchForm);
+      filterMovies(valueInputSearchForm);
   };
 
   useEffect(() => {
     setMovies(JSON.parse(localStorage.getItem("searchList")) || []);
-    setValueInputSearchForm(JSON.parse(localStorage.getItem("searchInput")) || '');
-    setIsChecked(JSON.parse(localStorage.getItem("isChecked")) || false);
+    setValueInputSearchForm(
+      JSON.parse(localStorage.getItem("searchInput")) || ""
+    );
+    setIsShort(JSON.parse(localStorage.getItem("isShort")) || false);
   }, []);
-
+  
+  useEffect(() => {
+    localStorage.getItem("searchList") && filterMovies(valueInputSearchForm);
+  }, [isShort]);
 
   return (
     <main className='movies__container'>
       <AuthHeader />
       <SearchForm
         isValid={isValid}
-        isChecked={isChecked}
+        isShort={isShort}
         valueInputSearchForm={valueInputSearchForm}
         handleInput={handleInput}
         handleSearch={handleSearch}

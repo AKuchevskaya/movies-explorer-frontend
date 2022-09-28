@@ -3,7 +3,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 function SearchForm({
   isValid,
-  isChecked,
+  isShort,
   changeSearchButtonState,
   handleSearch,
   handleInput,
@@ -36,7 +36,7 @@ function SearchForm({
           Найти
         </button>
       </div>
-      <FilterCheckbox changeFilterShortMovies={changeFilterShortMovies} isChecked={isChecked} />
+      <FilterCheckbox changeFilterShortMovies={changeFilterShortMovies} isShort={isShort} />
     </form>
   );
 }

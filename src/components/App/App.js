@@ -136,7 +136,7 @@ function App() {
         localStorage.removeItem("searchList");
         localStorage.removeItem("moviesFromApi");
         localStorage.removeItem("searchInput");
-        localStorage.removeItem("isChecked");
+        localStorage.removeItem("isShort");
         setLoggedIn(false);
         history.push("/");
       })
