@@ -19,7 +19,7 @@ function SearchForm({
           placeholder='Фильм'
           className='searchform__input'
           type='search'
-          value={valueInputSearchForm}
+          value={valueInputSearchForm || ''}
           required
         >
         </input>

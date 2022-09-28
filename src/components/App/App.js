@@ -36,32 +36,44 @@ function App() {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [tooltip, setTooltip] = useState("");
 
-  const checkToken = () => {
-    apiMain
-      .getProfile()
-      .then((res) => {
-        if (res) {
-          setCurrentData(res);
-          setLoggedIn(true);
-          history.push("/movies");
-        } else {
-          history.push("/signin");
-        }
-      })
-
-      .catch((err) => {
-        setErrorResult(`Проблема с правами доступа...: ${err}`);
-        console.log(`Ошибка доступа...: ${err}`);
-      })
-      .finally(() => {
-        setErrorResult("");
-      });
-  };
- 
-
   useEffect(() => {
-    checkToken();
-  }, []);
+    if (loggedIn) {
+      Promise.all([
+        //в Promise.all передаем массив промисов которые нужно выполнить
+        apiMain.getProfile(),
+        apiMain.getLikedMovies(),
+      ])
+        .then(([data, films]) => {
+          setCurrentData(data);
+          const moviesFromServer = films.map((i) => i);
+          setLikedMovies(
+            moviesFromServer.filter((movie) => movie.owner === currentData._id)
+          );
+        })
+        .catch((err) => {
+          setErrorResult(`Проблема получения данных пользователя...: ${err}`);
+          console.log(`Ошибка получения данных пользователя.....: ${err}`);
+        })
+        .finally(() => {
+          setErrorResult("");
+        });
+    }
+  }, [loggedIn, currentData._id]);
+  
+  useEffect(() => {
+      apiMain
+        .getProfile()
+        .then((res) => {
+          setLoggedIn(true)
+        })
+        .catch((err) => {
+          setErrorResult(`Проблема с правами доступа...: ${err}`);
+          console.log(`Ошибка доступа...: ${err}`);
+        })
+        .finally(() => {
+          setErrorResult("");
+        });
+  }, [loggedIn]);
 
   const handleRegister = ({ name, email, password }) => {
     setIsPreloader(true);
@@ -132,29 +144,7 @@ function App() {
         console.log(err);
       });
   };
-  useEffect(() => {
-    if (loggedIn) {
-      Promise.all([
-        //в Promise.all передаем массив промисов которые нужно выполнить
-        apiMain.getProfile(),
-        apiMain.getLikedMovies(),
-      ])
-        .then(([data, films]) => {
-          setCurrentData(data);
-          const moviesFromServer = films.map((i) => i);
-          setLikedMovies(
-            moviesFromServer.filter((movie) => movie.owner === currentData._id)
-          );
-        })
-        .catch((err) => {
-          setErrorResult(`Проблема получения данных пользователя...: ${err}`);
-          console.log(`Ошибка получения данных пользователя.....: ${err}`);
-        })
-        .finally(() => {
-          setErrorResult("");
-        });
-    }
-  }, [loggedIn, currentData._id]);
+
 
   // получаем весь массив фильмов с apiMovies, забираем только те поля, которые нам будут нужны
   const getMoviesFromApi = () => {
@@ -308,7 +298,7 @@ function App() {
             component={SavedMovies}
           />
 
-          <Route path='/404'>
+          <Route path='/*'>
             <NotFoundPage />
           </Route>
         </Switch>

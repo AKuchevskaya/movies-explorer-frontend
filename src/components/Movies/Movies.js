@@ -13,19 +13,14 @@ function Movies({
   handleLikeMovie,
   handleDeleteMovie,
 }) {
-  const [isChecked, setIsChecked] = useState(
-    JSON.parse(localStorage.getItem("isChecked"))
-  );
-  const [movies, setMovies] = useState(
-    [JSON.parse(localStorage.getItem("moviesFromApi"))] || []
-  );
-  const [valueInputSearchForm, setValueInputSearchForm] = useState(
-    JSON.parse(localStorage.getItem("searchInput")) || ""
-  );
+
+  const [isChecked, setIsChecked] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [valueInputSearchForm, setValueInputSearchForm] = useState("");
   const [validationMessage, setValidationFoundMessage] = useState("");
-  const [message, setMessage] = useState("");
   const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
   const [isValid, setIsValid] = useState(false);
+  const moviesFromApi = JSON.parse(localStorage.getItem("moviesFromApi"));
 
   useEffect(() => {
     !isValid
@@ -39,7 +34,6 @@ function Movies({
   useEffect(
     (e) => {
       valueInputSearchForm === "" ? setIsValid(false) : setIsValid(true);
-      setMessage("");
     },
     [valueInputSearchForm]
   );
@@ -48,8 +42,7 @@ function Movies({
     setIsSearchButtonClicked(!isSearchButtonClicked);
   };
   // фильтруем в соответствии с запросом и положением переключателя короткометражек
-  const filterMovies = () => {
-    const moviesFromApi = JSON.parse(localStorage.getItem("moviesFromApi"));
+  const filterMovies = (valueInputSearchForm) => {
     const filteredMovies = moviesFromApi
       .filter((i) => {
         return i.nameRU
@@ -65,22 +58,39 @@ function Movies({
       .map((i) => i);
 
     if (!isChecked) {
-      !filteredMovies ? setMessage(message) : setMovies(filteredMovies);
-      localStorage.setItem("searchList", JSON.stringify(filteredMovies));
-      localStorage.setItem("isChecked", JSON.stringify(isChecked));
-      localStorage.setItem("searchInput", JSON.stringify(valueInputSearchForm));
+      if (filteredMovies.length === 0) {
+        setValidationFoundMessage(
+          "Поиск не дал результатов, попробуйте еще раз"
+        );
+        setMovies([]);
+        localStorage.setItem("searchList", JSON.stringify([]));
+      } else {
+        setMovies(filteredMovies);
+        setValidationFoundMessage("");
+        localStorage.setItem("searchList", JSON.stringify(filteredMovies));
+        localStorage.setItem("isChecked", JSON.stringify(isChecked));
+      }
     } else {
-      !shortMovies ? setMessage(message) : setMovies(shortMovies);
-      localStorage.setItem("searchList", JSON.stringify(shortMovies));
-      localStorage.setItem("isChecked", JSON.stringify(isChecked));
-      localStorage.setItem("searchInput", JSON.stringify(valueInputSearchForm));
+      if (shortMovies.length === 0) {
+        setValidationFoundMessage(
+          "Поиск не дал результатов, попробуйте еще раз"
+        );
+        setMovies([]);
+        localStorage.setItem("searchList", JSON.stringify(shortMovies));
+
+      } else {
+        setMovies(shortMovies);
+        setValidationFoundMessage("");
+        localStorage.setItem("searchList", JSON.stringify(shortMovies));
+        localStorage.setItem("isChecked", JSON.stringify(isChecked));
+      }
     }
   };
 
   // меняем значение переключателя фильтра короткометражек
   const changeFilterShortMovies = () => {
-   
     setIsChecked(!isChecked);
+    filterMovies(valueInputSearchForm);
   };
 
   // запускаем фильтрацию по нажатию кнопки найти, сохраняем результат поиска и запрос в локальное хранилище
@@ -88,59 +98,47 @@ function Movies({
     e.preventDefault();
     localStorage.getItem("moviesFromApi") &&
       isSearchButtonClicked &&
-      filterMovies();
+      localStorage.setItem("searchInput", JSON.stringify(valueInputSearchForm));
+    filterMovies(valueInputSearchForm);
   };
 
   useEffect(() => {
-    setMovies(JSON.parse(localStorage.getItem("searchList")));
-    setValueInputSearchForm(JSON.parse(localStorage.getItem("searchInput")));
-    setIsChecked(JSON.parse(localStorage.getItem("isChecked")));
+    setMovies(JSON.parse(localStorage.getItem("searchList")) || []);
+    setValueInputSearchForm(JSON.parse(localStorage.getItem("searchInput")) || '');
+    setIsChecked(JSON.parse(localStorage.getItem("isChecked")) || false);
   }, []);
 
-  // // при отрисовке страницы достаем данные из локольного хранилища
-  //  useEffect(() => {
 
-  //  }, []);
-  useEffect(() => {
-    if (movies.length === 0) {
-      setMessage("Поиск не дал результатов, попробуйте еще раз");
-    } else setMessage("");
-  }, [movies]);
-  useEffect(() => {
-    filterMovies();
-  }, [isChecked]);
   return (
     <main className='movies__container'>
-    
       <AuthHeader />
-        <SearchForm
-          isValid={isValid}
-          isChecked={isChecked}
-          valueInputSearchForm={valueInputSearchForm}
-          handleInput={handleInput}
-          handleSearch={handleSearch}
-          changeSearchButtonState={changeSearchButtonState}
-          changeFilterShortMovies={changeFilterShortMovies}
+      <SearchForm
+        isValid={isValid}
+        isChecked={isChecked}
+        valueInputSearchForm={valueInputSearchForm}
+        handleInput={handleInput}
+        handleSearch={handleSearch}
+        changeSearchButtonState={changeSearchButtonState}
+        changeFilterShortMovies={changeFilterShortMovies}
+      />
+      {isPreloader && <Preloader />}
+
+      {validationMessage && (
+        <span className='movies__container-error'>{validationMessage}</span>
+      )}
+
+      {movies && (
+        <MoviesCardList
+          movies={movies}
+          likedMovies={likedMovies}
+          addLikedMovie={addLikedMovie}
+          handleLikeMovie={handleLikeMovie}
+          handleDeleteMovie={handleDeleteMovie}
         />
-        {isPreloader && <Preloader />}
+      )}
 
-        {validationMessage && (
-          <span className='movies__container-error'>{validationMessage}</span>
-        )}
-        {message && <span className='movies__container-error'>{message}</span>}
-
-        {movies && (
-          <MoviesCardList
-            movies={movies}
-            likedMovies={likedMovies}
-            addLikedMovie={addLikedMovie}
-            handleLikeMovie={handleLikeMovie}
-            handleDeleteMovie={handleDeleteMovie}
-          />
-        )}
-      
       <Footer />
-      </main>
+    </main>
   );
 }
 

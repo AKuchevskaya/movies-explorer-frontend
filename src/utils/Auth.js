@@ -1,5 +1,5 @@
 import { SERVER_URL } from "../utils/constants";
- // const SERVER_URL = "http://localhost:3001";
+//const SERVER_URL = "http://localhost:3001";
 
 const checkResponse = (res) => {
   return res.ok
