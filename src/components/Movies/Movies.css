@@ -1,0 +1,23 @@
+.movies__container {
+    max-width: calc(100% - 70px*2);
+    padding: 0 70px 20px;
+    display: flex;
+    flex-direction: column;
+}
+.movies__container-error {
+text-align: center;
+color: #FF4062;
+}
+@media screen and (max-width: 1279px) {
+    .movies__container {
+        max-width: calc(100% - 30px*2);
+        padding: 0 30px 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .movies__container {
+        max-width: calc(100% - 10px*2);
+        padding: 0 10px 10px;
+    }
+}

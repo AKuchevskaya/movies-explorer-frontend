@@ -1,0 +1,144 @@
+.account {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+.account__container {
+    display: flex;
+    flex-direction: column;
+    max-width: 410px;
+    width: 100%;
+    margin: 0 auto 70px;
+}
+
+.account__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.account__title {
+    margin: 0;
+    padding: 71px 0 106px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+}
+
+.account__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.account__form-label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.account__form-label:first-of-type {
+    border-bottom: solid 1px #E8E8E8;
+}
+
+.account__label-text {
+    padding: 17px 0 16px;
+    margin: 0;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: start;
+    max-width: 141px;
+}
+
+.account__form-input {
+    border: none;
+    outline: none;
+    text-align: right;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.account__form-error {
+    color: #FF4062;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    min-height: 10px;
+    opacity: 1;
+    /* opacity: 0; */
+}
+.account__buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.account__enter {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    margin: 0 0 16px;
+    cursor: pointer;
+    transition: opacity 0.5s linear;
+}
+
+.account__enter:hover {
+    text-decoration: underline;
+}
+
+
+.account__style-error {
+    color: #FF4062;
+    cursor: default;
+}
+.account__style-error:hover {
+    text-decoration: none;
+}
+
+.account__exit {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #FF4062;
+    cursor: pointer;
+    transition: opacity 0.5s linear;
+}
+
+.account__exit:hover {
+    text-decoration: underline;
+}
+
+
+@media screen and (max-width: 1279px) {
+    .account__container {
+        justify-content: space-between;
+        height: calc(100vh - 109px);
+    }
+    .account__title {
+        padding: 0 0 80px;
+    }
+    .account__enter {
+        margin: 0 0 16px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .account__container {
+        max-width: 260px;
+        height: calc(100vh - 114px);
+        margin-bottom: 40px;
+    }
+    
+    .account__title {
+        padding: 69px 0 64px;
+    }
+}

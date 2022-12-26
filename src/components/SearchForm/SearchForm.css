@@ -1,0 +1,98 @@
+.searchform {
+    display: flex;
+    justify-content: space-between;
+    padding: 76px 0 82px;
+    border-bottom: 1px solid rgb(170, 170, 170, 0.2);
+}
+
+.searchform__search {
+    /* max-width: 906px; */
+    width: 100%;
+    border: 1.5px solid rgb(170, 170, 170, 0.2);
+    border-radius: 50px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    justify-content: space-between;
+    outline: none;
+}
+.searchform__search:focus {
+    outline: #AAAAAA;
+    opacity: 1;
+}
+.searchform__search:active {
+    outline: 1.5px solid #AAAAAA;
+}
+.searchform__search:hover {
+    opacity: 1;
+    outline: 1.5px solid #AAAAAA;
+}
+
+.searchform__input {
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    opacity: 0.2;
+    cursor: pointer;
+    width: 100%;
+    padding-left: 22px;
+    color: #000000;
+}
+.searchform__input:focus {
+    opacity: 1;
+    outline-color: #AAAAAA;
+    /* background-color: #F9F9F9; */
+    color: #000000;
+}
+.searchform__input:active {
+    outline-color: #AAAAAA;
+    color: #000000;
+}
+.searchform__input:hover {
+    outline-color: rgb(170, 170, 170, 0.2);
+}
+
+.searchform__button {
+    background: #000000;
+    border-radius: 48px;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 7px 12px;
+    margin: 7px 7px 7px 21px;
+    border: none;
+    outline: none;
+    transition: opacity 0.5s linear;
+    cursor: pointer;
+}
+
+.searchform__button:hover {
+    opacity: 0.2;
+}
+.searchform__button_disebled {
+    opacity: 0.2;
+}
+@media screen and (max-width: 1279px) {
+    .searchform {
+        flex-direction: column;
+        align-items: center;
+        padding: 58px 0 57px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .searchform {
+        flex-direction: column;
+        align-items: center;
+        padding: 58px 0 44px;
+    }
+    .searchform__search {
+        font-size: 11px;
+    }
+    .searchform__input {
+        padding-left: 16px;
+    }
+}

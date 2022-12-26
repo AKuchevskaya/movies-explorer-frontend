@@ -1,0 +1,149 @@
+.movie__box {
+    background: #FDFDFD;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie__header {
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movie__title {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.movie__time {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: right;
+    color: #A0A0A0;
+    margin: 0;
+}
+
+.movie__picture {
+    width: 360px;
+    height: 200px;
+    object-fit: cover;
+    overflow: hidden;
+    background-color: #FDFDFD;
+}
+
+.movie__button-delete {
+    margin: 18px 0;
+    align-self: center;
+    background: url(../../images/button_for_saved_movie.svg);
+    box-sizing: border-box;
+    background-color: #F9F9F9;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 29px;
+    border-radius: 30px;
+    border: none;
+    transition: opacity 0.5s linear;
+    cursor: pointer;
+}
+
+.movie__button-delete:hover {
+    /* opacity: 0.2; */
+    border: 2px solid #000000;
+}
+
+.movie__button-delete:focus {
+    border: 2px solid #000000;
+    outline: none;
+}
+
+.movie__button-save {
+    background-color: #F9F9F9;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    width: 100px;
+    height: 29px;
+    align-self: center;
+    margin: 18px 0;
+    cursor: pointer;
+    transition: opacity 0.5s linear;
+
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 11px;
+    text-align: center;
+}
+
+.movie__button-save:hover {
+    border: 2px solid #000000;
+}
+
+.movie__button-save:focus {
+    border: 2px solid  #000000;
+    outline: none;
+}
+
+.movie__button_active {
+    background: url(../../images/tumbler_save.svg);
+    box-sizing: border-box;
+    background-color: #FF4062;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    width: 100px;
+    height: 29px;
+    margin: 18px 0;
+    align-self: center;
+    cursor: pointer;
+    transition: opacity 0.5s linear;
+}
+
+.movie__button_active:hover {
+    border: 2px solid #F9F9F9;
+    /* opacity: 0.2; */
+}
+.movie__button_active:focus {
+    border: 2px solid #F9F9F9;
+    outline: none;
+}
+
+@media screen and (max-width: 1279px) {
+    .movie__picture {
+        width: 342px;
+        height: 190px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .movie__header {
+        padding: 14px;
+    }
+    .movie__title {
+        font-size: 12px;
+    }
+    .movie__time {
+        font-size: 10px;
+    }
+    .movie__picture {
+        width: 300px;
+        height: 169px;
+    }
+    .movie__button-delete {
+        margin: 13px 0;
+    }
+    .movie__button-save {
+        margin: 13px 0;
+    }
+}

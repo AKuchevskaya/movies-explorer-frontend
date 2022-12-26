@@ -1,0 +1,113 @@
+.footer__container {
+    display: flex;
+    flex-direction: column;
+    /* max-width: calc(100% - 70px*2);
+    padding: 79px 70px 20px; */
+    max-width: 100%;
+    padding: 79px 70px 20px;
+}
+
+@media screen and (max-width: 1279px) {
+    .footer__container {
+        /* padding-top: 219px; */
+        /* max-width: calc(100% - 30px*2);
+        padding: 79px 30px 20px; */
+        padding: 79px 30px 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .footer__container {
+        /* max-width: calc(100% - 10px*2);
+        padding: 60px 10px 10px; */
+        padding: 60px 10px 10px;
+    }
+}
+
+.footer__title {
+    margin: 0;
+    padding-bottom: 20px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #A0A0A0;
+    text-align: center;
+    border-bottom: solid 1px #E8E8E8;
+}
+
+.footer__columns {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+.footer__copyright {
+    margin: 0;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.footer__links {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(min-content, max-content));
+    column-gap: 20px;
+    list-style: none;
+}
+
+.footer__link {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: right;
+    transition: opacity 0.5s linear;
+    cursor: pointer;
+}
+
+.footer__link:hover {
+    font-weight: 500;
+    opacity: 0.6;
+    text-decoration: underline 2px #000000;
+}
+.footer__link:focus {
+    opacity: 0.6;
+    text-decoration: underline 2px #000000;
+    border: none;
+    outline: none;
+}
+
+@media screen and (max-width: 767px) {
+    .footer__columns {
+        padding-top: 28px;
+        flex-direction: column-reverse;
+    }
+
+    .footer__title {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .footer__copyright {
+        text-align: center;
+        padding-top: 30px;
+    }
+
+    .footer__links {
+        grid-template-columns: repeat(1, minmax(min-content, max-content));
+        grid-template-rows: repeat(3, minmax(min-content, max-content));
+        row-gap: 9px;
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .footer__link {
+        font-size: 12px;
+        line-height: 15px;
+        text-align: center;
+    }
+
+}
